@@ -51,4 +51,5 @@ Route::get('/job-pending', ['as' => 'viewPendingJob','uses' => 'JobController@vi
 Route::get('/job-view/{job_id}', ['as' => 'viewJob','uses' => 'JobController@viewJob']);
 Route::get('/job-view-quotation/{job_id}', ['as' => 'viewQuotation','uses' => 'JobController@viewQuotation']);
 Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' => 'JobController@SubmitQuotation']);
+Route::get('/status-quotation', ['as' => 'viewStatusQuotation','uses' => 'JobController@viewStatusQuotation']);
 });

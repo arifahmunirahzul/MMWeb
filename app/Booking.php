@@ -38,6 +38,6 @@ class Booking extends Model
 	}
 
     public static function getSingleData($booking_id) {
-        return User::where('bookings.booking_id',$booking_id)->first();
+        return Booking::where('bookings.booking_id',$booking_id)->first();
     }
 }

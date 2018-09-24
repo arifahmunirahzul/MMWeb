@@ -102,7 +102,13 @@
            <li class="{!! classActivePath('job-pending') !!}">
             <a href="{{url('/job-pending')}}">
               <i class="nc-icon nc-bullet-list-67"></i>
-              <p>Pending Job</p>
+              <p>Pending Job Request</p>
+            </a>
+          </li>
+          <li class="{!! classActivePath('status-quotation') !!}">
+            <a href="{{url('/status-quotation')}}">
+              <i class="nc-icon nc-bulb-63"></i>
+              <p>Quotation Status</p>
             </a>
           </li>
           @endif
