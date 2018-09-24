@@ -46,4 +46,9 @@ Route::get('/user/view-approve/{id}', ['as' => 'viewApprove','uses' => 'UserCont
 Route::post('/user/save-approve/{id}', ['uses' => 'UserController@ApproveSP','as' => 'ApproveSP']);
 Route::get('/logout', function(){Auth::logout(); return Redirect::to('login');
     });
+
+Route::get('/job-pending', ['as' => 'viewPendingJob','uses' => 'JobController@viewPendingJob']);
+Route::get('/job-view/{job_id}', ['as' => 'viewJob','uses' => 'JobController@viewJob']);
+Route::get('/job-view-quotation/{job_id}', ['as' => 'viewQuotation','uses' => 'JobController@viewQuotation']);
+Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' => 'JobController@SubmitQuotation']);
 });

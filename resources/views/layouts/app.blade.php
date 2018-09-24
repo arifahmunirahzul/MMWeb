@@ -98,6 +98,14 @@
             </a>
           </li>
           @endif
+          @if(Auth::user()->role == 'Service Provider')
+           <li class="{!! classActivePath('job-pending') !!}">
+            <a href="{{url('/job-pending')}}">
+              <i class="nc-icon nc-bullet-list-67"></i>
+              <p>Pending Job</p>
+            </a>
+          </li>
+          @endif
           <li>
             <a href="{{url('/logout')}}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">

@@ -7,6 +7,7 @@ use App\Booking;
 
 class Booking extends Model
 {
+    protected $primaryKey = 'booking_id';
     protected $fillable = [
         'booking_id', 'customer_id', 'type_service', 'date_booking', 'duration', 'type_property', 'clean_area', 'package', 'total_visitor', 'type_event', 'message', 'created_at', 'updated_at'
         ]; 
@@ -35,4 +36,8 @@ class Booking extends Model
  
     	return 'MM' . sprintf('%06d', intval($number) + 1);
 	}
+
+    public static function getSingleData($booking_id) {
+        return User::where('bookings.booking_id',$booking_id)->first();
+    }
 }
