@@ -20,11 +20,14 @@
               <div class="image">
                 <img src="{{ asset('assets/img/bg/damir-bosnjak.jpg') }}" alt="...">
               </div>
+              {{Form::open(['route' => ['editUser','id'=>$data->id],'method'=>'POST', 'enctype' => 'multipart/form-data'])}}
+                @csrf
               <div class="card-body">
                 <div class="author">
                   <a href="#">
                     @if($data->url_image == '')
                     <img class="avatar border-gray" src="{{ asset('assets/img/default-avatar.png') }}" alt="...">
+                    {{Form ::file('url_image',null,['class'=>'form-control','rows'=>'6', 'required'])}}
                     @endif
                     @if($data->url_image != '')
                      <img class="avatar border-gray" src="{{ url('/') }}/upload/userpic/<?php echo $data->url_image; ?>" alt="...">
@@ -75,8 +78,7 @@
                 <h5 class="title">Edit Profile</h5>
               </div>
               <div class="card-body">
-                {{Form::open(['route' => ['editUser','id'=>$data->id],'method'=>'POST'])}}
-                  @csrf
+               
                   <div class="row">
                     @if($data->role == 'Admin' or $data->role == 'Customer')
                     <div class="col-md-6 pr-1">

@@ -52,4 +52,9 @@ Route::get('/job-view/{job_id}', ['as' => 'viewJob','uses' => 'JobController@vie
 Route::get('/job-view-quotation/{job_id}', ['as' => 'viewQuotation','uses' => 'JobController@viewQuotation']);
 Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' => 'JobController@SubmitQuotation']);
 Route::get('/status-quotation', ['as' => 'viewStatusQuotation','uses' => 'JobController@viewStatusQuotation']);
+Route::get('/list-job-request', ['as' => 'ListPendingJob','uses' => 'JobController@ListPendingJob']);
+Route::get('/provider-quotation', ['as' => 'ProviderQuotation','uses' => 'JobController@ProviderQuotation']);
+Route::get('/type-service', ['as' => 'TypeService','uses' => 'TableController@TypeService']);
+Route::get('/type-service/view-add', ['as' => 'viewAddTypeService','uses' => 'TableController@viewAddTypeService']);
+Route::post('/type-service/add', ['as' => 'addTypeService','uses' => 'TableController@addTypeService']);
 });

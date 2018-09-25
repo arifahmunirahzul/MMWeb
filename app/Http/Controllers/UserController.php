@@ -168,6 +168,22 @@ class UserController extends Controller
             $user = User::find($id);
             if (Input::get('password') != '')
                 $user->password = bcrypt(Input::get('password'));
+            if ($request->hasFile('url_image'))
+                {
+                $file = $request->file('url_image');
+                $filename = time() . str_random(5) . '_' . $user->id . '.' . $file->getClientOriginalExtension();
+                $path = 'upload/userpic';
+                $file->move($path, $filename);
+                $oldFilename = $user->url_image;
+
+                //delete oldpicture
+                Storage::disk('public')->delete("upload/userpic/$oldFilename");
+                }
+
+                else{
+                    $filename=$user->url_image;
+                }
+
             $user->service = Input::get('service');
             $user->company_name = Input::get('company_name');
             $user->name = Input::get('name');
@@ -176,7 +192,7 @@ class UserController extends Controller
             $user->u_address = Input::get('u_address');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
-            $user->commission = Input::get('commission')/100;
+            $user->url_image = $filename;
             $user->save();
             return redirect()->route('viewUser');
         }
@@ -185,12 +201,29 @@ class UserController extends Controller
             $user = User::find($id);
             if (Input::get('password') != '')
                 $user->password = bcrypt(Input::get('password'));
+            if ($request->hasFile('url_image'))
+                {
+                $file = $request->file('url_image');
+                $filename = time() . str_random(5) . '_' . $user->id . '.' . $file->getClientOriginalExtension();
+                $path = 'upload/userpic';
+                $file->move($path, $filename);
+                $oldFilename = $user->url_image;
+
+                //delete oldpicture
+                Storage::disk('public')->delete("upload/userpic/$oldFilename");
+                }
+
+                else{
+                    $filename=$user->url_image;
+                }
+
             $user->name = Input::get('name');
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
+            $user->url_image = $filename;
             $user->save();
             return redirect()->route('viewUser');
         }

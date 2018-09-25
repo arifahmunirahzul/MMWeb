@@ -97,6 +97,50 @@
               <p>User Management</p>
             </a>
           </li>
+          <li class="{!! classActivePath('list-job-request') !!}">
+            <a href="{{url('/list-job-request')}}">
+              <i class="nc-icon nc-bullet-list-67"></i>
+              <p>Job Request</p>
+            </a>
+          </li>
+          <li class="{!! classActivePath('provider-quotation') !!}">
+            <a href="{{url('/provider-quotation')}}">
+              <i class="nc-icon nc-briefcase-24"></i>
+              <p>Provider Quotation</p>
+            </a>
+          </li>
+           <li>
+            <a data-toggle="collapse" href="#formsExamples">
+              <i class="nc-icon nc-tile-56"></i>
+              <p>
+                Tables
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="formsExamples">
+              <ul class="nav">
+                <li>
+                  <a href="{{url('/type-service')}}">
+                    <span class="sidebar-mini-icon">TS</span>
+                    <span class="sidebar-normal"> TYPE SERVICE </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/forms/extended.html">
+                    <span class="sidebar-mini-icon">TP</span>
+                    <span class="sidebar-normal"> TYPE PROPERTY </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="../examples/forms/validation.html">
+                    <span class="sidebar-mini-icon">TE</span>
+                    <span class="sidebar-normal"> TYPE EVENT </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
           @endif
           @if(Auth::user()->role == 'Service Provider')
            <li class="{!! classActivePath('job-pending') !!}">
@@ -110,7 +154,7 @@
               <i class="nc-icon nc-bulb-63"></i>
               <p>Quotation Status</p>
             </a>
-          </li>
+          </li> 
           @endif
           <li>
             <a href="{{url('/logout')}}" onclick="event.preventDefault();

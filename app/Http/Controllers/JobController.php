@@ -77,4 +77,28 @@ class JobController extends Controller
                   -> get();
          return view('job.status-quotation', compact('jobstatus'));
     }
+
+    public function ListPendingJob()
+    {
+        $jobrequest = DB:: table('job_requests')
+                  -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
+                  -> join ('users', 'users.id', '=', 'bookings.customer_id')
+                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'job_requests.created_at', 'job_requests.status_job')
+                  -> orderBy('job_requests.job_id','DESC')
+                  -> get();
+         return view('job.list-pending', compact('jobrequest'));
+    }
+
+     public function ProviderQuotation()
+    {
+      
+        $jobstatus = DB:: table('bit_jobs')
+                  -> join ('job_requests', 'job_requests.job_id', '=', 'bit_jobs.job_id')
+                   -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
+                  -> join ('users', 'users.id', '=', 'bit_jobs.provider_id')
+                  -> select ('bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status')
+                  -> orderBy('bit_jobs.updated_at','DESC')
+                  -> get();
+         return view('job.provider-quotation', compact('jobstatus'));
+    }
 }
