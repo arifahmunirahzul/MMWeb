@@ -119,20 +119,20 @@
             </a>
             <div class="collapse " id="formsExamples">
               <ul class="nav">
-                <li>
+                <li class="{!! classActivePath('type-service') !!}">
                   <a href="{{url('/type-service')}}">
                     <span class="sidebar-mini-icon">TS</span>
                     <span class="sidebar-normal"> TYPE SERVICE </span>
                   </a>
                 </li>
-                <li>
-                  <a href="../examples/forms/extended.html">
+                <li class="{!! classActivePath('type-property') !!}">
+                  <a href="{{url('/type-property')}}">
                     <span class="sidebar-mini-icon">TP</span>
                     <span class="sidebar-normal"> TYPE PROPERTY </span>
                   </a>
                 </li>
-                <li>
-                  <a href="../examples/forms/validation.html">
+                <li class="{!! classActivePath('type-event') !!}">
+                  <a href="{{url('/type-event')}}">
                     <span class="sidebar-mini-icon">TE</span>
                     <span class="sidebar-normal"> TYPE EVENT </span>
                   </a>

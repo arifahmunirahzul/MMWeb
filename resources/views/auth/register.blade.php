@@ -94,6 +94,10 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Service') }}</label>
                                 <div class="col-md-6">
                                 {!! Form::select("service",['Urut Pantang'=>'Urut Pantang','Katering'=>'Katering','Pembantu Rumah'=>'Pembantu Rumah (Harian)'],null,["class"=>"form-control", 'required']) !!}
+                                @foreach ($arrayname as $data)                                       
+                                <option value="{{ $data->id }}"  >{{ $data->key_name }}</option>                                                      
+                                 @endforeach
+
                                 </div>
                         </div>
 

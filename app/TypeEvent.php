@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\TypeEvent;
 
 class TypeEvent extends Model
 {
@@ -11,4 +12,8 @@ class TypeEvent extends Model
         ]; 
 
     public $timestamps = false;
+
+    public static function getSingleData($id) {
+        return TypeEvent::where('type_events.id',$id)->first();
+    }
 }

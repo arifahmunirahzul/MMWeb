@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\TypeProperty;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,4 +12,8 @@ class TypeProperty extends Model
         ]; 
 
     public $timestamps = false;
+
+     public static function getSingleData($id) {
+        return TypeProperty::where('type_properties.id',$id)->first();
+    }
 }

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
         else
             return redirect('/logout');
     });
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', ['as' => 'viewUser','uses' => 'UserController@viewUser']);
 Route::get('/user/viewadd', ['as' => 'viewAddUser','uses' => 'UserController@viewAddUser']);
@@ -54,7 +55,26 @@ Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' 
 Route::get('/status-quotation', ['as' => 'viewStatusQuotation','uses' => 'JobController@viewStatusQuotation']);
 Route::get('/list-job-request', ['as' => 'ListPendingJob','uses' => 'JobController@ListPendingJob']);
 Route::get('/provider-quotation', ['as' => 'ProviderQuotation','uses' => 'JobController@ProviderQuotation']);
+
 Route::get('/type-service', ['as' => 'TypeService','uses' => 'TableController@TypeService']);
 Route::get('/type-service/view-add', ['as' => 'viewAddTypeService','uses' => 'TableController@viewAddTypeService']);
 Route::post('/type-service/add', ['as' => 'addTypeService','uses' => 'TableController@addTypeService']);
+Route::get('/view-edit-type-service/{id}', ['as' => 'viewEditTypeService','uses' => 'TableController@viewEditTypeService']);
+Route::post('/edit-typeservice-save/{id}', ['uses' => 'TableController@editTypeService','as' => 'editTypeService']);
+Route::delete('/type-service/delete/{id}', ['uses' => 'TableController@deleteTypeService','as' => 'deleteTypeService']);
+
+Route::get('/type-property', ['as' => 'TypeProperty','uses' => 'TableController@TypeProperty']);
+Route::get('/type-property/view-add', ['as' => 'viewAddTypeProperty','uses' => 'TableController@viewAddTypeProperty']);
+Route::post('/type-property/add', ['as' => 'addTypeProperty','uses' => 'TableController@addTypeProperty']);
+Route::get('/view-edit-type-property/{id}', ['as' => 'viewEditTypeProperty','uses' => 'TableController@viewEditTypeProperty']);
+Route::post('/edit-typeproperty-save/{id}', ['uses' => 'TableController@editTypeProperty','as' => 'editTypeProperty']);
+Route::delete('/type-property/delete/{id}', ['uses' => 'TableController@deleteTypeProperty','as' => 'deleteTypeProperty']);
+
+Route::get('/type-event', ['as' => 'TypeEvent','uses' => 'TableController@TypeEvent']);
+Route::get('/type-event/view-add', ['as' => 'viewAddTypeEvent','uses' => 'TableController@viewAddTypeEvent']);
+Route::post('/type-event/add', ['as' => 'addTypeEvent','uses' => 'TableController@addTypeEvent']);
+Route::get('/view-edit-type-event/{id}', ['as' => 'viewEditTypeEvent','uses' => 'TableController@viewEditTypeEvent']);
+Route::post('/edit-typeevent-save/{id}', ['uses' => 'TableController@editTypeEvent','as' => 'editTypeEvent']);
+Route::delete('/type-event/delete/{id}', ['uses' => 'TableController@deleteTypeEvent','as' => 'deleteTypeEvent']);
+
 });

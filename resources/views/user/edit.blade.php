@@ -96,19 +96,25 @@
                   </div>
                   @endif
                   @if($data->role == 'Service Provider')
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Company Name</label>
                         {{Form ::text('company_name',$data->company_name,['class'=>'form-control','rows'=>'6'])}}
                       </div>
                     </div>
-                    <div class="col-md-5 pr-1">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Service</label>
+                        {!! Form::select("service",['Urut Pantang'=>'Urut Pantang','Katering'=>'Katering','Pembantu Rumah'=>'Pembantu Rumah'],$data->service,["class"=>"form-control",'rows'=>'6']) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Name</label>
                         {{Form ::text('name',$data->name,['class'=>'form-control','rows'=>'6'])}}
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         {{Form ::text('email',$data->email,['class'=>'form-control','rows'=>'6'])}}
@@ -116,20 +122,14 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-3 px-1">
-                      <div class="form-group">
-                        <label>Service</label>
-                        {!! Form::select("service",['Urut Pantang'=>'Urut Pantang','Katering'=>'Katering','Pembantu Rumah'=>'Pembantu Rumah'],$data->service,["class"=>"form-control",'rows'=>'6']) !!}
-                      </div>
-                    </div>
-                    <div class="col-md-5 pr-1">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Approval Status</label>
                         {{Form ::label('approval_status',$data->approval_status,['class'=>'form-control','rows'=>'6'])}}
                       </div>
                     </div>
                     @if($data->approval_status == 'Approved')
-                   <div class="col-md-4 pl-1">
+                   <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Commission (%)</label>
                         {{Form ::text('commission',$data->commission*100,['class'=>'form-control','rows'=>'6'])}}

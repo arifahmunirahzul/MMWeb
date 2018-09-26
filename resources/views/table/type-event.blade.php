@@ -6,11 +6,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Type Service</h4>
+                <h4 class="card-title">Type Property</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">
-                  <div class="text-right"><a href="{{route('viewAddTypeService')}}"<button class="btn btn-success">ADD NEW</button></a></div>
+                  <div class="text-right"><a href="{{route('viewAddTypeEvent')}}"<button class="btn btn-success">ADD NEW</button></a></div>
                 </div>
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
@@ -27,10 +27,10 @@
                       <td class="text-center">{{$i++}}</td>
                       <td class="text-center">{{$data->name}}</td>
                       <td class="text-center">
-                         <form name ="frmdelete" action="{{route('deleteTypeService',['id'=>$data->id])}}" method="POST">
+                         <form name ="frmdelete" action="{{route('deleteTypeEvent',['id'=>$data->id])}}" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{route('viewEditTypeService',['id'=>$data->id])}}" class="btn btn-warning btn-link btn-icon btn-m edit"><i class="fa fa-edit"></i></a>
+                        <a href="{{route('viewEditTypeEvent',['id'=>$data->id])}}" class="btn btn-warning btn-link btn-icon btn-m edit"><i class="fa fa-edit"></i></a>
                         <button class="btn btn-danger btn-link btn-icon btn-m remove" type="submit" onclick="return myFunction()"><i class="fa fa-times"></i></button>
                       </form>
                       </td>

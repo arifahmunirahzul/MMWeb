@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\TypeService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -79,6 +80,12 @@ class RegisterController extends Controller
             'service' => $data['service']
 
         ]);
+    }
+
+    public function register()
+    {
+        $items = TypeService::pluck('name', 'id');
+        return view('auth.register', compact('items'));
     }
 
     protected function createuser(Request $request)
