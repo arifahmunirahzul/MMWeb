@@ -142,7 +142,7 @@
           </li>
 
           @endif
-          @if(Auth::user()->role == 'Service Provider')
+          @if(Auth::user()->role == 'Service Provider' && Auth::user()->approval_status == 'Approved')
            <li class="{!! classActivePath('job-pending') !!}">
             <a href="{{url('/job-pending')}}">
               <i class="nc-icon nc-bullet-list-67"></i>

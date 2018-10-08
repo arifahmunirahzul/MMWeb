@@ -46,7 +46,7 @@
               @if($data->role == 'Service Provider')
               <div class="card-footer">
                 @if($data->approval_status == 'Pending Approved')
-                <center><a href="{{route('viewApprove',['id'=>$data->id])}}"<button class="btn  btn-success btn-sm btn-round"><i class="fa fa-check-square-o"></i> Approve User</button></a></center>
+                <center><a href="{{route('viewApprove',['id'=>$data->id])}}"<button class="btn  btn-success btn-sm btn-round"><i class="fa fa-check-square-o"></i> Approval Status</button></a></center>
                 @endif
                 <hr>
                 <div class="button-container">
@@ -105,7 +105,12 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Service</label>
-                        {!! Form::select("service",['Urut Pantang'=>'Urut Pantang','Katering'=>'Katering','Pembantu Rumah'=>'Pembantu Rumah'],$data->service,["class"=>"form-control",'rows'=>'6']) !!}
+                         <select name="service" class="form-control" >
+                                <option value="{{ $data->service }}">{{ $data->service }}</optio>
+                                @foreach ($typeservice_array as $input)                              
+                                <option value="{{ $input->name }}">{{ $input->name }}</option>                                                      
+                                 @endforeach
+                        </select>
                       </div>
                     </div>
                     <div class="col-md-6 pr-1">
@@ -171,7 +176,29 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Address</label>
-                        {{Form ::textarea('u_address',$data->u_address,['class'=>'form-control','rows'=>'6'])}}
+                        {{Form ::text('u_address',$data->u_address,['class'=>'form-control','rows'=>'6'])}}
+                      </div>
+                    </div>
+                  </div>
+                   <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>City</label>
+                        {{Form ::text('u_city',$data->u_city,['class'=>'form-control','rows'=>'6'])}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Postcode</label>
+                        {{Form ::text('u_postcode',$data->u_postcode,['class'=>'form-control','rows'=>'6'])}}
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>State</label>
+                         {!! Form::select("u_state",['Perlis'=>'Perlis','Kedah'=>'Kedah','Perak'=>'Perak','Selangor'=>'Selangor','Negeri_Sembilan'=>'Negeri_Sembilan','Melaka'=>'Melaka','Johor'=>'Johor','Pahang'=>'Pahang','Terengganu'=>'Terengganu','Kelantan'=>'Kelantan','W.P.Kuala_Lumpur'=>'W.P.Kuala_Lumpur','W.P.Labuan'=>'W.P.Labuan','Sabah'=>'Sabah','Sarawak'=>'Sarawak'],$data->u_state,["class"=>"form-control","placeholder"=>"Please Select state"]) !!}   
                       </div>
                     </div>
                   </div>

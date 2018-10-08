@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\TypeService;
+use Mail;
+use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -76,16 +78,16 @@ class RegisterController extends Controller
             'company_name' => $data['company_name'],
             'icnumber' => $data['icnumber'],
             'u_address' => $data['u_address'],
+            'u_city' => $data['u_city'],
+            'u_postcode' => $data['u_postcode'],
+            'u_state' => $data['u_state'],
             'u_phone' =>$data['u_phone'],
             'service' => $data['service']
 
         ]);
-    }
 
-    public function register()
-    {
-        $items = TypeService::pluck('name', 'id');
-        return view('auth.register', compact('items'));
+        $email = $data['email'];
+        Mail::to($email)->send(new Welcome($email));
     }
 
     protected function createuser(Request $request)
@@ -114,8 +116,12 @@ class RegisterController extends Controller
             'company_name' => $request->company_name,
             'icnumber' => $request->icnumber,
             'u_address' => $request->u_address,
+            'u_city' => $request->u_city,
+            'u_postcode' => $request->u_postcode,
+            'u_state' => $request->u_state,
             'u_phone' => $request->u_phone,
             'service' => $request->service
+
 
         ]);
          return response()->json(['message' => 'Successfully Register', 'status' => true], 201);

@@ -90,6 +90,9 @@ class UserController extends Controller
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
+            $user->u_city = Input::get('u_city');
+            $user->u_postcode = Input::get('u_postcode');
+            $user->u_state = Input::get('u_state');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
             $user->url_image = $filename;
@@ -121,11 +124,14 @@ class UserController extends Controller
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
+            $user->u_city = Input::get('u_city');
+            $user->u_postcode = Input::get('u_postcode');
+            $user->u_state = Input::get('u_state');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
             $user->url_image = $filename;
             $user->save();
-            return redirect()->route('viewProfile');
+            return redirect()->route('viewEditProfile');
         }
         
     }
@@ -190,6 +196,9 @@ class UserController extends Controller
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
+            $user->u_city = Input::get('u_city');
+            $user->u_postcode = Input::get('u_postcode');
+            $user->u_state = Input::get('u_state');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
             $user->url_image = $filename;
@@ -221,6 +230,9 @@ class UserController extends Controller
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
+            $user->u_city = Input::get('u_city');
+            $user->u_postcode = Input::get('u_postcode');
+            $user->u_state = Input::get('u_state');
             $user->u_phone = Input::get('u_phone');
             $user->about_me = Input::get('about_me');
             $user->url_image = $filename;

@@ -40,4 +40,66 @@ class APIBitJobController extends Controller
          else
          	return response()->json(['message' => 'Failed to proceed a process', 'status' => false], 401);
     }
+
+    public function ViewQuotation (Request $request, $job_id)
+    {
+        $booking_no = DB::table('job_requests')->where('job_id', '=', $job_id)->value('booking_id');
+        $customer_id = DB::table('bookings')->where('booking_id', '=', $booking_no)->value('customer_id');
+        
+        if($request->customer_id == $customer_id)
+        {
+            $quotations = DB:: table('bit_jobs')
+                  -> join ('job_requests', 'job_requests.job_id', '=', 'bit_jobs.job_id')
+                  -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
+                  -> join ('users', 'users.id', '=', 'bit_jobs.provider_id')
+                  -> select ('bit_jobs.bitjob_id','bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status','bit_jobs.price' ,'bit_jobs.message')
+                  ->where('bit_jobs.job_id', $job_id)
+                  ->where('bit_jobs.status', '=', 'Pending')
+                  -> get();
+            return response()->json($quotations);
+        }
+
+        else
+          return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
+        
+    }
+
+     public function ConfirmQuotation (Request $request, $job_id)
+    {
+        $result = DB::table('bit_jobs')->select('bitjob_id', 'status')->where('job_id', '=', $job_id)->get();
+        $bitjob_no = $request->bitjob_id;
+        $booking_no = DB::table('job_requests')->where('job_id', '=', $job_id)->value('booking_id');
+        $customer_id = DB::table('bookings')->where('booking_id', '=', $booking_no)->value('customer_id');
+        
+        if($request->customer_id == $customer_id)
+        {
+
+          foreach($result as $data)
+          {
+            if($data->bitjob_id == $bitjob_no && $data->status == 'Pending')
+            {
+               $bitjob = BitJob::find($bitjob_no);
+               $bitjob->status = 'Accept';
+               $bitjob->save();
+            }
+
+            else if ($data->bitjob_id != $bitjob_no && $data->status == 'Pending')
+            {
+               $bitjob_number = $data->bitjob_id;            
+               $bitjob = BitJob::find($bitjob_number );
+               $bitjob->status = 'Unaccepted';
+               $bitjob->save();
+            }
+
+            else
+               return response()->json(['message' => 'Status are not in Pending Mood', 'status' => false], 401);
+          }
+
+          return response()->json(['message' => 'You booking is completed', 'status' => true], 201);  
+        }
+
+        else
+          return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
+        
+    }
 }

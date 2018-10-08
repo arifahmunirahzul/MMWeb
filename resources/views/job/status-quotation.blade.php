@@ -18,6 +18,8 @@
                       <th class="text-center">Booking Number</th>
                       <th class="text-center">Customer Name</th>
                       <th class="text-center">Service</th>
+                      <th class="text-center">Price (RM)</th>
+                      <th class="text-center" style="width: 25%;">Message</th>
                       <th class="text-center">Current Status</th>
                       
                     </tr>
@@ -30,6 +32,8 @@
                       <td class="text-center">{{$data->booking_id}}</td>
                       <td class="text-center">{{$data->name}}</td>
                       <td class="text-center">{{$data->service}}</td>
+                       <td class="text-center">RM {{$data->price}}</td>
+                        <td class="text-center">{{$data->message}}</td>
                       <td class="text-center">{{$data->status}}</td>
                     
                     </tr>

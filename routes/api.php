@@ -77,3 +77,15 @@ Route::group([
       
 });
 
+Route::group([
+
+    'middleware' => 'jwt.verify',
+    'prefix' => 'quotation'
+
+], function ($router) {
+
+    Route::post('view-quotation/{job_id}', 'APIBitJobController@ViewQuotation');
+    Route::post('confirm-quotation/{job_id}', 'APIBitJobController@ConfirmQuotation');
+      
+});
+

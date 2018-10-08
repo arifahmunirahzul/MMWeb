@@ -82,6 +82,31 @@
                             <div class="col-md-6">
                                 {{Form ::textarea('u_address',null,['class'=>'form-control','rows'=>'6'])}}
                             </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+
+                            <div class="col-md-6">
+                                {{Form ::text('u_city',null,['class'=>'form-control','rows'=>'6'])}}
+                            </div>
+                            
+                        </div>
+                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
+
+                            <div class="col-md-6">
+                                {{Form ::text('u_postcode',null,['class'=>'form-control','rows'=>'6'])}}
+                            </div>
+                            
+                        </div>
+                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
+
+                            <div class="col-md-6">
+                                {!! Form::select("u_state",['Perlis'=>'Perlis','Kedah'=>'Kedah','Perak'=>'Perak','Selangor'=>'Selangor','Negeri_Sembilan'=>'Negeri_Sembilan','Melaka'=>'Melaka','Johor'=>'Johor','Pahang'=>'Pahang','Terengganu'=>'Terengganu','Kelantan'=>'Kelantan','W.P.Kuala_Lumpur'=>'W.P.Kuala_Lumpur','W.P.Labuan'=>'W.P.Labuan','Sabah'=>'Sabah','Sarawak'=>'Sarawak'],null,["class"=>"form-control","placeholder"=>"Please Select state"]) !!}   
+                            </div>
+                            
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
@@ -93,11 +118,11 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Service') }}</label>
                                 <div class="col-md-6">
-                                {!! Form::select("service",['Urut Pantang'=>'Urut Pantang','Katering'=>'Katering','Pembantu Rumah'=>'Pembantu Rumah (Harian)'],null,["class"=>"form-control", 'required']) !!}
-                                @foreach ($arrayname as $data)                                       
-                                <option value="{{ $data->id }}"  >{{ $data->key_name }}</option>                                                      
+                                <select name="service" class="form-control" >
+                                @foreach ($typeservice_array as $data)                                       
+                                <option value="{{ $data->name }}">{{ $data->name }}</option>                                                      
                                  @endforeach
-
+                                 </select>
                                 </div>
                         </div>
 
