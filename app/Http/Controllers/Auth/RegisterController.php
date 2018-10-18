@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\TypeService;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -102,6 +102,9 @@ class RegisterController extends Controller
         'password' => bcrypt($request->password),
         ]);
 
+        $email = $request->email;
+        Mail::to($email)->send(new Welcome($email));
+
         return response()->json(['message' => 'Successfully Register', 'status' => true], 201);
        }
 
@@ -124,6 +127,10 @@ class RegisterController extends Controller
 
 
         ]);
+
+        $email = $request->email;
+        Mail::to($email)->send(new Welcome($email));
+
          return response()->json(['message' => 'Successfully Register', 'status' => true], 201);
        }
 

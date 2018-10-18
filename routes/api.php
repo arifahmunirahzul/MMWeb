@@ -89,3 +89,15 @@ Route::group([
       
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'face_id'
+
+], function ($router) {
+
+    Route::post('upload-image', 'APIImageController@UploadImage');     
+});
+
+
+

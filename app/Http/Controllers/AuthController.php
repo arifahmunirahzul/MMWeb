@@ -10,6 +10,8 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuccessfullyRegister;
 
 class AuthController extends Controller
 {
@@ -51,7 +53,8 @@ class AuthController extends Controller
 		            ]);
 
 		            $token = JWTAuth::fromUser($user);
-
+                    $email=$request->email;
+                    Mail::to($email)->send(new SuccessfullyRegister ($email));
 		            return response()->json(compact('user','token'),201);
 
 		       }
@@ -82,7 +85,8 @@ class AuthController extends Controller
 		            ]);
 
 		            $token = JWTAuth::fromUser($user);
-
+                    $email=$request->email;
+                    Mail::to($email)->send(new SuccessfullyRegister ($email));
 		            return response()->json(compact('user','token'),201);
 				    }
 
