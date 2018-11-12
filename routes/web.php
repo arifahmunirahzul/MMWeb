@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/user', ['as' => 'viewUser','uses' => 'UserController@viewUser']);
 Route::get('/user/viewadd', ['as' => 'viewAddUser','uses' => 'UserController@viewAddUser']);
 Route::get('/profile', ['as' => 'viewProfile','uses' => 'UserController@viewProfile']);
@@ -55,6 +56,7 @@ Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' 
 Route::get('/status-quotation', ['as' => 'viewStatusQuotation','uses' => 'JobController@viewStatusQuotation']);
 Route::get('/list-job-request', ['as' => 'ListPendingJob','uses' => 'JobController@ListPendingJob']);
 Route::get('/provider-quotation', ['as' => 'ProviderQuotation','uses' => 'JobController@ProviderQuotation']);
+Route::get('/view-quotation/{bitjob_id}', ['as' => 'viewQuotationDetails','uses' => 'JobController@viewQuotationDetails']);
 
 Route::get('/type-service', ['as' => 'TypeService','uses' => 'TableController@TypeService']);
 Route::get('/type-service/view-add', ['as' => 'viewAddTypeService','uses' => 'TableController@viewAddTypeService']);

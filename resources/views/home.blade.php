@@ -1,200 +1,157 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(Auth::user()->role == 'Admin')
       <div class="content">
         <div class="row">
-           <div class="row">
-          <div class="col-md-3">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Email Statistics</h5>
-                <p class="card-category">Last Campaign Performance</p>
-              </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
               <div class="card-body ">
-                <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-delivery-fast text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Booking Today</p>
+                      @foreach($ordertoday as $key=>$data)
+                      <p class="card-title">{{$data->numberofbooking}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-info"></i> Open
-                </div>
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar"></i> Number of emails sent
+                  <i class="fa fa-refresh"></i> Update Now
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">New Visitators</h5>
-                <p class="card-category">Out Of Total Number</p>
-              </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
               <div class="card-body ">
-                <canvas id="chartDonut2" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-money-coins text-success"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Sales</p>
+                       <?php
+                            $totalearn=0;
+                        ?>
+                        @foreach($salesmonth as $key=>$data)
+                          <?php
+                                $totalearn += $data->price;
+                          ?>
+                                    
+                        @endforeach
+                      <p class="card-title">RM {{$totalearn}}
+                        <p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-warning"></i> Visited
-                </div>
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-check"></i> Campaign sent 2 days ago
+                  <i class="fa fa-calendar-o"></i> By Month
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Orders</h5>
-                <p class="card-category">Total number</p>
-              </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
               <div class="card-body ">
-                <canvas id="chartDonut3" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-watch-time text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Pending Bookings</p>
+                      @foreach($pendingorder as $key=>$data)
+                      <p class="card-title">{{$data->pendingorders}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-danger"></i> Completed
-                </div>
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i> Updated 3 minutes ago
+                  <i class="fa fa-clock-o"></i> In the last hour
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Subscriptions</h5>
-                <p class="card-category">Our Users</p>
-              </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
               <div class="card-body ">
-                <canvas id="chartDonut4" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-chart-pie-36 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Complete Booking</p>
+                      @foreach($completedorder as $key=>$data)
+                      <p class="card-title">{{$data->completedorders}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-secondary"></i> Ended
-                </div>
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-history"></i> Total users
+                  <i class="fa fa-refresh"></i> Update now
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        </div>
+        
+         
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="card  card-tasks">
               <div class="card-header ">
-                <h4 class="card-title">Tasks</h4>
-                <h5 class="card-category">Backend development</h5>
+                <h4 class="card-title">Latest Bookings</h4>
+                <h5 class="card-category">List of Latest Booking</h5>
               </div>
               <div class="card-body ">
-                <div class="table-full-width table-responsive">
+                <div>
                   <table class="table">
                     <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="img-row">
-                          <div class="img-wrapper">
-                            <img src="ssets/img/faces/ayo-ogunseinde-2.jpg" class="img-raised" />
-                          </div>
-                        </td>
-                        <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="nc-icon nc-ruler-pencil"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="nc-icon nc-simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="img-row">
-                          <div class="img-wrapper">
-                            <img src="assets/img/faces/erik-lucatero-2.jpg" class="img-raised" />
-                          </div>
-                        </td>
-                        <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="nc-icon nc-ruler-pencil"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="nc-icon nc-simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="img-row">
-                          <div class="img-wrapper">
-                            <img src="assets/img/faces/kaci-baum-2.jpg" class="img-raised" />
-                          </div>
-                        </td>
-                        <td class="text-left">Using dummy content or fake information in the Web design process can result in products with unrealistic
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="nc-icon nc-ruler-pencil"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="nc-icon nc-simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="img-row">
-                          <div class="img-wrapper">
-                            <img src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" class="img-raised" />
-                          </div>
-                        </td>
-                        <td class="text-left">But I must explain to you how all this mistaken idea of denouncing pleasure</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="nc-icon nc-ruler-pencil"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                            <i class="nc-icon nc-simple-remove"></i>
-                          </button>
-                        </td>
-                      </tr>
+                      @foreach($latestbook as $key=>$data)
+                        <tr>
+                          <td class="text-center" ><a><strong>{{$data->booking_id}}</strong></a></td>
+                            <td><a>{{$data->service}}</a></td>
+                            <td class="hidden-xs text-center">
+                                {{$data->city}}
+                            </td>
+                            <td class="hidden-xs text-center">
+                                {{$data->state}}
+                            </td>
+                            <td class="hidden-xs text-center">
+                                {{$data->created_at}}
+                            </td>
+                            </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -207,20 +164,18 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="card ">
               <div class="card-header ">
-                <h4 class="card-title">2018 Sales</h4>
-                <p class="card-category">All products including Taxes</p>
+                <h4 class="card-title">2018 Booking</h4>
+                <p class="card-category">All Booking Overview</p>
               </div>
               <div class="card-body ">
-                <canvas id="chartActivity"></canvas>
+                 <div style="height: 340px;">{!! $chart->container() !!}</div>
               </div>
+              {!! $chart->script() !!}
               <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-info"></i> Tesla Model S
-                  <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                </div>
+                
                 <hr>
                 <div class="stats">
                   <i class="fa fa-check"></i> Data information certified
@@ -234,4 +189,194 @@
      
     </div>
   </div>
+  @endif
+  @if(Auth::user()->role == 'Service Provider')
+  <div class="content">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-delivery-fast text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Booking Today</p>
+                      @foreach($ordertoday_sp as $key=>$data)
+                      <p class="card-title">{{$data->numberofbook}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i> Update Now
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-money-coins text-success"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Total Sales</p>
+                       <?php
+                            $totalearn=0;
+                        ?>
+                        @foreach($salesmonth_sp as $key=>$data)
+                          <?php
+                                $totalearn += $data->price;
+                          ?>
+                                    
+                        @endforeach
+                      <p class="card-title">RM {{$totalearn}}
+                        <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-calendar-o"></i> By Month
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-watch-time text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Pending Bookings</p>
+                      @foreach($pendingorder_sp as $key=>$data)
+                      <p class="card-title">{{$data->pendingorders}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-clock-o"></i> In the last hour
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-chart-pie-36 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Complete Booking</p>
+                      @foreach($completedorder as $key=>$data)
+                      <p class="card-title">{{$data->completedorders}}
+                        <p>
+                      @endforeach
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i> Update now
+                </div>
+              </div>
+            </div>
+          </div>
+        
+         
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card  card-tasks">
+              <div class="card-header ">
+                <h4 class="card-title">Latest Bookings</h4>
+                <h5 class="card-category">List of Latest Booking</h5>
+              </div>
+              <div class="card-body ">
+                <div>
+                  <table class="table">
+                    <tbody>
+                      @foreach($latestbook_sp as $key=>$data)
+                        <tr>
+                          <td class="text-center" ><a><strong>{{$data->booking_id}}</strong></a></td>
+                            <td><a>{{$data->service}}</a></td>
+                            <td class="hidden-xs text-center">
+                                {{$data->city}}
+                            </td>
+                            <td class="hidden-xs text-center">
+                                {{$data->state}}
+                            </td>
+                            <td class="hidden-xs text-center">
+                                {{$data->created_at}}
+                            </td>
+                            </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh spin"></i> Updated 3 minutes ago
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card ">
+              <div class="card-header ">
+                <h4 class="card-title">2018 Booking</h4>
+                <p class="card-category">All Booking Overview</p>
+              </div>
+              <div class="card-body ">
+                 <div style="height: 340px;">{!! $chart->container() !!}</div>
+              </div>
+              {!! $chart->script() !!}
+              <div class="card-footer ">
+                
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-check"></i> Data information certified
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+     
+    </div>
+  </div>
+  @endif
 @endsection

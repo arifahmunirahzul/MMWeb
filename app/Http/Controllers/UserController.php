@@ -14,6 +14,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use App\StoreLocation;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuccessfullyRegister; 
 
 class UserController extends Controller
 {
@@ -48,7 +50,7 @@ class UserController extends Controller
 
         ]);
     }
-
+ 
     public function viewUserProfile($id)
     {
         $data = User::getSingleData($id);
@@ -272,6 +274,8 @@ class UserController extends Controller
             'status' => $request['status']? 1 : 0,
             ]);
         
+         $email = $request->email;;
+         Mail::to($email)->send(new SuccessfullyRegister($email));
          return redirect()->route('viewUser');
        }
   

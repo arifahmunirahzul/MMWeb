@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Jobstatus;
 use App\JobRequest;
 use App\Booking;
 use DB;
@@ -16,12 +17,12 @@ class APIBookController extends Controller
 {
     public function BookUrutPantang(Request $request, $customer_id) {
 
-    	$role = DB::table('users')->where('id', '=', $customer_id)->value('role');
+      $role = DB::table('users')->where('id', '=', $customer_id)->value('role');
       
-    	if($role == 'Customer'){
+      if($role == 'Customer'){
 
-    	   $booking_no = Booking::getNextBookNumber();
-    	   $book = new Booking;
+         $booking_no = Booking::getNextBookNumber();
+         $book = new Booking;
            $book->booking_id = $booking_no;
            $book->customer_id = $customer_id;
            $book->type_service = 'Urut Pantang';
@@ -30,7 +31,7 @@ class APIBookController extends Controller
            $book->message = Input::get('message');
            $book->save();
 
-    	   $job_request = new JobRequest;
+         $job_request = new JobRequest;
            $job_request->booking_id = $booking_no;
            $job_request->address = Input::get('address');
            $job_request->city = Input::get('city');
@@ -41,13 +42,14 @@ class APIBookController extends Controller
            $job_request->service= 'Urut Pantang';
            $job_request->status_job = 'Pending';
            $job_request->save();
+           Jobstatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 
        }//end if
 
        else
-       	return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
+        return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
 
 
     }
@@ -55,12 +57,12 @@ class APIBookController extends Controller
 
     public function BookKatering(Request $request, $customer_id) {
 
-    	$role = DB::table('users')->where('id', '=', $customer_id)->value('role');
+      $role = DB::table('users')->where('id', '=', $customer_id)->value('role');
       
-    	if($role == 'Customer'){
+      if($role == 'Customer'){
 
-    	     $booking_no = Booking::getNextBookNumber();
-    	     $book = new Booking;
+           $booking_no = Booking::getNextBookNumber();
+           $book = new Booking;
            $book->booking_id = $booking_no;
            $book->customer_id = $customer_id;
            $book->type_service = 'Katering';
@@ -70,7 +72,7 @@ class APIBookController extends Controller
            $book->message = Input::get('message');
            $book->save();
 
-    	   $job_request = new JobRequest;
+         $job_request = new JobRequest;
            $job_request->booking_id = $booking_no;
            $job_request->address = Input::get('address');
            $job_request->city = Input::get('city');
@@ -81,25 +83,26 @@ class APIBookController extends Controller
            $job_request->service= 'Katering';
            $job_request->status_job = 'Pending';
            $job_request->save();
+           Jobstatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 
        }//end if
 
        else
-       	return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
+        return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
 
 
     }
 
     public function BookPembantuRumah(Request $request, $customer_id) {
 
-    	$role = DB::table('users')->where('id', '=', $customer_id)->value('role');
+      $role = DB::table('users')->where('id', '=', $customer_id)->value('role');
       
-    	if($role == 'Customer'){
+      if($role == 'Customer'){
 
-    	   $booking_no = Booking::getNextBookNumber();
-    	   $book = new Booking;
+         $booking_no = Booking::getNextBookNumber();
+         $book = new Booking;
            $book->booking_id = $booking_no;
            $book->customer_id = $customer_id;
            $book->date_booking = Input::get('date_booking');
@@ -110,7 +113,7 @@ class APIBookController extends Controller
            $book->message = Input::get('message');
            $book->save();
 
-    	   $job_request = new JobRequest;
+         $job_request = new JobRequest;
            $job_request->booking_id = $booking_no;
            $job_request->address = Input::get('address');
            $job_request->city = Input::get('city');
@@ -121,13 +124,14 @@ class APIBookController extends Controller
            $job_request->service= 'Pembantu Rumah';
            $job_request->status_job = 'Pending';
            $job_request->save();
+           Jobstatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 
        }//end if
 
        else
-       	return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
+        return response()->json(['message' => 'You are not allowed for this process', 'status' => false], 401);
 
 
     }

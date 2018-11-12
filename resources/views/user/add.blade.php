@@ -1,25 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
-      <div class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Add New User</h4>
-              </div>
-              <div class="card-body">
-                <div class="toolbar">
-                  @if(Session::has('flash_message_error'))
-                        <div class="alert alert-danger alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button> 
-                                <strong>{!! session('flash_message_error') !!}</strong>
-                        </div>
-                  @endif
-                </div>
-                
-                {{Form::open(array('route' => 'addUser','method'=>'POST'))}}
-                @csrf
                   <div class="row">
                     <label class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
@@ -63,26 +42,4 @@
                           <span class="form-check-sign"></span>
                         </label>
                       </div>
-                      <br>
-                      <br>
-                      <div class="row">
-                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
-                      </div>
-                     
-                    </div>
-                  </div>
-                 
-                    </div>
-                  </div>
-                {{Form::close()}}
-              
-              </div>
-              <!-- end content-->
-            </div>
-            <!--  end card  -->
-          </div>
-          <!-- end col-md-12 -->
-        </div>
-        <!-- end row -->
-      </div>
-@endsection
+   

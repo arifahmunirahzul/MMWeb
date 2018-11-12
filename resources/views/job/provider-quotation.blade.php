@@ -20,6 +20,7 @@
                       <th class="text-center">Service</th>
                       <th class="text-center">Price (RM)</th>
                       <th class="text-center">Current Status</th>
+                      <th class="text-center">Action</th>
                      
                     </tr>
                   </thead>
@@ -33,6 +34,7 @@
                       <td class="text-center">{{$data->service}}</td>
                        <td class="text-center">RM {{$data->price}}</td>
                       <td class="text-center">{{$data->status}}</td>
+                      <td class="text-center"><button class="btn btn-success btn-link btn-icon btn-m" type="button" data-mybooking="{{$data->booking_id}}" data-myname="{{$data->name}}" data-myservice="{{$data->service}}" data-myprice="{{$data->price}}" data-mymessage="{{$data->message}}" data-mystatus="{{$data->status}}" data-toggle="modal" data-target="#edit"><i class="fa fa-eye"></i></button></td>
                       
                     
                     </tr>
@@ -48,6 +50,26 @@
         </div>
         <!-- end row -->
       </div>
+
+  <!--Modal -->
+  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class ="modal-content">
+          <div class="modal-header">
+            <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+            <h4 class="modal-title" id="myModalLabel">Details Quotation</h4>
+          </div>
+          
+          <div class="modal-body">
+            @include('job.view-quotation')
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+          </div>
+        
+      </div>
+    </div>
+  </div>
       
       <script>
         function myFunction() {

@@ -7,7 +7,7 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">User Management</h4>
-                <div class="text-right"><a href="{{route('viewAddUser')}}"<button class="btn btn-success">Add User</button></a></div>
+                <div class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add User</button></div>
               </div>
               <div class="card-body">
                 <div class="toolbar">
@@ -57,6 +57,28 @@
         </div>
         <!-- end row -->
       </div>
+
+      <!--Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class ="modal-content">
+          <div class="modal-header">
+            <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add New User</h4>
+          </div>
+         {{Form::open(array('route' => 'addUser','method'=>'POST'))}}
+          @csrf
+          <div class="modal-body">
+            @include('user.add')
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        {{Form::close()}}
+      </div>
+    </div>
+  </div>
       
       <script>
         function myFunction() {

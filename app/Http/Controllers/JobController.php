@@ -96,9 +96,15 @@ class JobController extends Controller
                   -> join ('job_requests', 'job_requests.job_id', '=', 'bit_jobs.job_id')
                    -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
                   -> join ('users', 'users.id', '=', 'bit_jobs.provider_id')
-                  -> select ('bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status','bit_jobs.price')
+                  -> select ('bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status','bit_jobs.price', 'bit_jobs.message')
                   -> orderBy('bit_jobs.updated_at','DESC')
                   -> get();
          return view('job.provider-quotation', compact('jobstatus'));
+    }
+
+    public function viewQuotationDetails($bitjob_id)
+    {
+        
+        return view('job.view-quotation');
     }
 }

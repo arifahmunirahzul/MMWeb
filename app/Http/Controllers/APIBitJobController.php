@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use DB;
 use App\BitJob;
 use App\JobRequest;
+use App\JobStatus;
 use Carbon\Carbon;
 
 class APIBitJobController extends Controller
@@ -26,7 +27,7 @@ class APIBitJobController extends Controller
 
         if($role == 'Service Provider' && $status_job == 'Pending' && $service_job == $service)
           {
-          	   $BitJob = new BitJob;
+          	 $BitJob = new BitJob;
 	           $BitJob->job_id = $job_id;
 	           $BitJob->provider_id = $provider_id;
 	           $BitJob->price = Input::get('price');
@@ -69,6 +70,7 @@ class APIBitJobController extends Controller
         $result = DB::table('bit_jobs')->select('bitjob_id', 'status')->where('job_id', '=', $job_id)->get();
         $bitjob_no = $request->bitjob_id;
         $booking_no = DB::table('job_requests')->where('job_id', '=', $job_id)->value('booking_id');
+        $provider_id = DB::table('bit_jobs')->where('bitjob_id', '=', $bitjob_no )->value('provider_id');
         $customer_id = DB::table('bookings')->where('booking_id', '=', $booking_no)->value('customer_id');
         
         if($request->customer_id == $customer_id)
@@ -81,6 +83,16 @@ class APIBitJobController extends Controller
                $bitjob = BitJob::find($bitjob_no);
                $bitjob->status = 'Accept';
                $bitjob->save();
+
+               $jobrequest = JobRequest::find($job_id);
+               $jobrequest->status_job = 'Active';
+               $jobrequest->provider_id = $provider_id;
+               $jobrequest->save();
+
+               $jobstatus = new JobStatus;
+               $jobstatus->job_id = $job_id;
+               $jobstatus->job_status = 'Active';
+               $jobstatus->save();
             }
 
             else if ($data->bitjob_id != $bitjob_no && $data->status == 'Pending')

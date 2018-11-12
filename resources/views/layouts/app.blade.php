@@ -507,15 +507,26 @@
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ asset('assets/demo/demo.js') }}"></script>
   <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
+    $('#edit').on('show.bs.modal', function (event) {
+      
+      var button = $(event.relatedTarget) 
+      var booking_id = button.data('mybooking')
+      var name = button.data('myname') 
+      var service = button.data('myservice')
+      var price = button.data('myprice')
+      var message = button.data('mymessage')
+      var status = button.data('mystatus')    
 
-
-      demo.initVectorMap();
-
-    });
-  </script>
+      var modal = $(this)
+      
+      modal.find('.modal-body #booking_id').val(booking_id);
+      modal.find('.modal-body #name').val(name);
+      modal.find('.modal-body #service').val(service);
+      modal.find('.modal-body #price').val(price);
+      modal.find('.modal-body #message').val(message);
+      modal.find('.modal-body #status').val(status);
+    })
+ </script>
   <script>
     $(document).ready(function() {
       $('#datatable').DataTable({
@@ -555,6 +566,8 @@
       });
     });
   </script>
+
+
 </body>
 
 </html>
