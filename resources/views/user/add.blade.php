@@ -1,4 +1,4 @@
-
+ 
                   <div class="row">
                     <label class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
@@ -42,4 +42,7 @@
                           <span class="form-check-sign"></span>
                         </label>
                       </div>
+                    </div>
+                  
+
    

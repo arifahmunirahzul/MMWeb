@@ -6,11 +6,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Type Service</h4>
+                <h4 class="card-title">Type Service Records</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">
-                  <div class="text-right"><a href="{{route('viewAddTypeService')}}"<button class="btn btn-success">ADD NEW</button></a></div>
+                  <div class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#myTypeService">ADD NEW</button></div>
                 </div>
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
@@ -46,6 +46,28 @@
           <!-- end col-md-12 -->
         </div>
         <!-- end row -->
+      </div>
+
+       <!--Modal -->
+      <div class="modal fade" id="myTypeService" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class ="modal-content">
+              <div class="modal-header">
+                <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add New Type Service</h4>
+              </div>
+              {{Form::open(array('route' => 'addTypeService','method'=>'POST'))}}
+                @csrf
+              <div class="modal-body">
+                @include('table.add-type-service')
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            {{Form::close()}}
+          </div>
+        </div>
       </div>
       
       <script>

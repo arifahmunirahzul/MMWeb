@@ -1,4 +1,4 @@
-
+ 
                   <div class="row">
                     <label class="col-sm-2 col-form-label">Booking Number</label>
                     <div class="col-sm-10">
@@ -50,5 +50,5 @@
                         <input type="text" class="form-control" row="6" name="status" id="status" disabled="">
                       </div>
                     </div>
-                  </div>
+                  
    

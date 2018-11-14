@@ -102,9 +102,5 @@ class JobController extends Controller
          return view('job.provider-quotation', compact('jobstatus'));
     }
 
-    public function viewQuotationDetails($bitjob_id)
-    {
-        
-        return view('job.view-quotation');
-    }
+   
 }

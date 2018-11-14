@@ -512,7 +512,7 @@
       var button = $(event.relatedTarget) 
       var booking_id = button.data('mybooking')
       var name = button.data('myname') 
-      var service = button.data('myservice')
+      var service = button.data('myservice') 
       var price = button.data('myprice')
       var message = button.data('mymessage')
       var status = button.data('mystatus')    

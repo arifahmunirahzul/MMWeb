@@ -23,7 +23,7 @@
                       <th class="text-center">Action</th>
                      
                     </tr>
-                  </thead>
+                  </thead> 
                   <tbody>
                      <?php $i = 1;?>
                       @foreach($jobstatus as $key=>$data)

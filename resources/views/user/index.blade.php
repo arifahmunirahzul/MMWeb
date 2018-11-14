@@ -4,7 +4,7 @@
       <div class="content">
         <div class="row">
           <div class="col-md-12">
-            <div class="card">
+            <div class="card"> 
               <div class="card-header">
                 <h4 class="card-title">User Management</h4>
                 <div class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add User</button></div>
