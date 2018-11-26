@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $chart->dataset('Booking','line', $bookings);
         $chart->labels($days);
 
-    	$carbon = Carbon::today();
+    	  $carbon = Carbon::today();
         $ordertoday = DB:: table('bookings')
                   -> select (DB::raw('count(booking_id) as numberofbooking'))
                   -> where(DB::raw("date(created_at)"), '=', $carbon->format('Y-m-d'))
@@ -68,7 +68,6 @@ class DashboardController extends Controller
 
         return view('dashboard', [
           'chart' => $chart,
-          'ordertoday' => $ordertoday,
           'ordertoday' => $ordertoday,
           'salesmonth' => $salesmonth,
           'pendingorder' => $pendingorder,

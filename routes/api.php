@@ -91,6 +91,16 @@ Route::group([
 
 Route::group([
 
+    'middleware' => 'jwt.verify',
+    'prefix' => 'dashboard'
+
+], function ($router) {
+
+    Route::get('service-provider-view/{user_id}', 'APIDashboardController@dashboardview');     
+});
+
+Route::group([
+
     'middleware' => 'api',
     'prefix' => 'face_id'
 
