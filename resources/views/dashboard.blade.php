@@ -144,9 +144,6 @@
                                 {{$data->city}}
                             </td>
                             <td class="hidden-xs text-center">
-                                {{$data->state}}
-                            </td>
-                            <td class="hidden-xs text-center">
                                 {{$data->created_at}}
                             </td>
                             </tr>

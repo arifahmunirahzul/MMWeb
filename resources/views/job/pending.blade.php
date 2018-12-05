@@ -11,12 +11,18 @@
               <div class="card-body">
                 <div class="toolbar">
                   <!--        Here you can write extra buttons/actions for the toolbar              -->
+                  @if(Session::has('flash_message_error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button> 
+                                <strong>{!! session('flash_message_error') !!}</strong>
+                        </div>
+                @endif
                   @if(Session::has('flash_message_success'))
                         <div class="alert alert-success alert-block">
                             <button type="button" class="close" data-dismiss="alert">×</button> 
                                 <strong>{!! session('flash_message_success') !!}</strong>
                         </div>
-                  @endif
+                @endif
                 </div>
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
@@ -39,7 +45,13 @@
                       <td class="text-center">{{$data->service}}</td>
                       <td class="text-center">{{$data->created_at}}</td>
                       <td class="text-center">
-                        <a href="{{route('viewJob',['job_id'=>$data->job_id])}}" class="btn btn-success btn-link btn-icon btn-m edit"><i class="fa fa-eye"></i></a>
+                        <a href="{{route('viewJob',['job_id'=>$data->job_id])}}" class="btn btn-sm edit">View</a>
+                        @if($data->service != 'Pembantu Rumah')
+                         <a href="{{route('viewQuotation',['job_id'=>$data->job_id])}}"<button class="btn btn-sm btn-primary" type="submit">Submit Quotation</button></a>
+                         @endif
+                        @if($data->service == 'Pembantu Rumah')
+                         <a href=""<button class="btn btn-sm btn-primary" type="submit" data-job_id="{{$data->job_id}}" data-toggle="modal" data-target="#myModalGrabJB">GRAB JOB</button></a>
+                        @endif
                       </form>
                       </td>
                     </tr>
@@ -56,17 +68,29 @@
         <!-- end row -->
       </div>
       
-      <script>
-        function myFunction() {
-        var r = confirm('Are you sure want to delete record ?');
-        
-        if (r == true){
-            document.frmdelete.submit();
-            return true;
-        }
-        
-        else
-            return false;
-         }
-        </script>
+
+    <!--Modal -->
+    <div class="modal fade" id="myModalGrabJB" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class ="modal-content">
+            <div class="modal-header">
+              <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+              <h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+            </div>
+            <form action="{{route('grabjob')}}" method="POST">
+            <input type="hidden" name="_method" value="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-body">
+             <p class = "text-center">
+              Are you sure want to grab this job??
+             </p>
+             <input type="hidden" name="job_id" id="job_id" value="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn default" data-dismiss="modal">No, Cancel</button>
+              <button type="submit" class="btn btn-primary">Yes, Proceed</button>
+            </div>
+          </form>
+      </div>
+    </div>
 @endsection

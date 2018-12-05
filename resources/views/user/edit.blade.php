@@ -45,8 +45,11 @@
               </div>
               @if($data->role == 'Service Provider')
               <div class="card-footer">
-                @if($data->approval_status == 'Pending Approved')
+                @if($data->approval_status == 'Pending Approval')
                 <center><a href="{{route('viewApprove',['id'=>$data->id])}}"<button class="btn  btn-success btn-sm btn-round"><i class="fa fa-check-square-o"></i> Approval Status</button></a></center>
+                @endif
+                @if($data->approval_status == 'Approved')
+                 <div class="button-container"><i class="fa fa-credit-card"></i> CREDIT : RM {{$data->credit}}</div>
                 @endif
                 <hr>
                 <div class="button-container">

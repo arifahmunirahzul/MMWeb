@@ -127,14 +127,14 @@
          
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-md-6">
             <div class="card  card-tasks">
               <div class="card-header ">
                 <h4 class="card-title">Latest Bookings</h4>
                 <h5 class="card-category">List of Latest Booking</h5>
               </div>
               <div class="card-body ">
-                <div>
+                <div class="table-full-width table-responsive">
                   <table class="table">
                     <tbody>
                       @foreach($latestbook as $key=>$data)
@@ -145,10 +145,7 @@
                                 {{$data->city}}
                             </td>
                             <td class="hidden-xs text-center">
-                                {{$data->state}}
-                            </td>
-                            <td class="hidden-xs text-center">
-                                {{$data->created_at}}
+                                {{date('d-m-Y', strtotime($data->created_at))}}
                             </td>
                             </tr>
                       @endforeach
@@ -164,7 +161,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-md-6">
             <div class="card ">
               <div class="card-header ">
                 <h4 class="card-title">2018 Booking</h4>
@@ -290,14 +287,14 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-chart-pie-36 text-primary"></i>
+                      <i class="fa fa-credit-card text-primary"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Complete Booking</p>
-                      @foreach($completedorder as $key=>$data)
-                      <p class="card-title">{{$data->completedorders}}
+                      <p class="card-category">Credit Balance</p>
+                      @foreach($credit_sp as $key=>$data)
+                      <p class="card-title">RM {{$data->credit}}
                         <p>
                       @endforeach
                     </div>
@@ -316,17 +313,17 @@
          
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-md-6">
             <div class="card  card-tasks">
               <div class="card-header ">
                 <h4 class="card-title">Latest Bookings</h4>
                 <h5 class="card-category">List of Latest Booking</h5>
               </div>
               <div class="card-body ">
-                <div>
+                <div class="table-full-width table-responsive">
                   <table class="table">
                     <tbody>
-                      @foreach($latestbook_sp as $key=>$data)
+                      @foreach($latestbook as $key=>$data)
                         <tr>
                           <td class="text-center" ><a><strong>{{$data->booking_id}}</strong></a></td>
                             <td><a>{{$data->service}}</a></td>
@@ -334,10 +331,7 @@
                                 {{$data->city}}
                             </td>
                             <td class="hidden-xs text-center">
-                                {{$data->state}}
-                            </td>
-                            <td class="hidden-xs text-center">
-                                {{$data->created_at}}
+                                {{date('d-m-Y', strtotime($data->created_at))}}
                             </td>
                             </tr>
                       @endforeach
@@ -353,7 +347,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-md-6">
             <div class="card ">
               <div class="card-header ">
                 <h4 class="card-title">2018 Booking</h4>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use App\Jobstatus;
+use App\JobStatus;
 use App\JobRequest;
 use App\Booking;
 use DB;
@@ -42,7 +42,7 @@ class APIBookController extends Controller
            $job_request->service= 'Urut Pantang';
            $job_request->status_job = 'Pending';
            $job_request->save();
-           Jobstatus::CreateStatusJob();
+           JobStatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 
@@ -83,7 +83,7 @@ class APIBookController extends Controller
            $job_request->service= 'Katering';
            $job_request->status_job = 'Pending';
            $job_request->save();
-           Jobstatus::CreateStatusJob();
+           JobStatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 
@@ -124,7 +124,7 @@ class APIBookController extends Controller
            $job_request->service= 'Pembantu Rumah';
            $job_request->status_job = 'Pending';
            $job_request->save();
-           Jobstatus::CreateStatusJob();
+           JobStatus::CreateStatusJob();
 
            return response()->json(['booking_id'=> $booking_no,'message' => 'Successful Booking Service', 'status' => true], 201);
 

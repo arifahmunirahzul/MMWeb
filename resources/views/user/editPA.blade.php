@@ -20,17 +20,17 @@
               <div class="image">
                 <img src="{{ asset('assets/img/bg/damir-bosnjak.jpg') }}" alt="...">
               </div>
-              {{Form::open(['route' => ['editUserProfile','id'=>$data->id],'method'=>'POST', 'enctype' => 'multipart/form-data'])}}
+              {{Form::open(['route' => ['editUser','id'=>$data->id],'method'=>'POST', 'enctype' => 'multipart/form-data'])}}
                 @csrf
               <div class="card-body">
                 <div class="author">
                   <a href="#">
                     @if($data->url_image == '')
                     <img class="avatar border-gray" src="{{ asset('assets/img/default-avatar.png') }}" alt="...">
-                     {{Form ::file('url_image',null,['class'=>'form-control','rows'=>'6', 'required'])}}
+                    {{Form ::file('url_image',null,['class'=>'form-control','rows'=>'6', 'required'])}}
                     @endif
                     @if($data->url_image != '')
-                    <img class="avatar border-gray" src="{{ url('/') }}/upload/userpic/<?php echo $data->url_image; ?>" alt="...">
+                     <img class="avatar border-gray" src="{{ url('/') }}/upload/userpic/<?php echo $data->url_image; ?>" alt="...">
                     {{Form ::file('url_image',null,['class'=>'form-control','rows'=>'6', 'required'])}}
                     @endif
                     <h5 class="title">{{$data->name}}</h5>
@@ -43,11 +43,14 @@
                   {{$data->u_address}}
                 </p>
               </div>
-               @if($data->approval_status == 'Approved')
-                 <div class="button-container"><i class="fa fa-credit-card"></i> CREDIT : RM {{$data->credit}}</div>
-                @endif
               @if($data->role == 'Service Provider')
               <div class="card-footer">
+                @if($data->approval_status == 'Pending Approval')
+                <center><a href="{{route('viewApprove',['id'=>$data->id])}}"<button class="btn  btn-success btn-sm btn-round"><i class="fa fa-check-square-o"></i> Approval Status</button></a></center>
+                @endif
+                @if($data->approval_status == 'Approved')
+                 <div class="button-container"><i class="fa fa-credit-card"></i> CREDIT : RM {{$data->credit}}</div>
+                @endif
                 <hr>
                 <div class="button-container">
                   <div class="row">
@@ -78,6 +81,7 @@
                 <h5 class="title">Edit Profile</h5>
               </div>
               <div class="card-body">
+               
                   <div class="row">
                     @if($data->role == 'Admin' or $data->role == 'Customer')
                     <div class="col-md-6 pr-1">
@@ -94,7 +98,7 @@
                     </div>
                   </div>
                   @endif
-                   @if($data->role == 'Service Provider' && Auth::user()->role == 'Admin')
+                  @if($data->role == 'Service Provider')
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Company Name</label>
@@ -104,7 +108,7 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Service</label>
-                        <select name="service" class="form-control" >
+                         <select name="service" class="form-control" >
                                 <option value="{{ $data->service }}">{{ $data->service }}</optio>
                                 @foreach ($typeservice_array as $input)                              
                                 <option value="{{ $input->name }}">{{ $input->name }}</option>                                                      
@@ -136,51 +140,7 @@
                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Commission (%)</label>
-                        {{Form ::label('commission',$data->commission*100,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                    @endif
-                  </div>
-
-                  @endif
-                  @if($data->role == 'Service Provider' && Auth::user()->role == 'Service Provider')
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Company Name</label>
-                        {{Form ::text('company_name',$data->company_name,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Service</label>
-                        {{Form ::label('service',$data->service,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Name</label>
-                        {{Form ::text('name',$data->name,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        {{Form ::text('email',$data->email,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Approval Status</label>
-                        {{Form ::label('approval_status',$data->approval_status,['class'=>'form-control','rows'=>'6'])}}
-                      </div>
-                    </div>
-                    @if($data->approval_status == 'Approved')
-                   <div class="col-md-6 pr-1">
-                      <div class="form-group">
-                        <label>Commission (%)</label>
-                        {{Form ::label('commission',$data->commission*100,['class'=>'form-control','rows'=>'6'])}}
+                        {{Form ::text('commission',$data->commission*100,['class'=>'form-control','rows'=>'6'])}}
                       </div>
                     </div>
                     @endif
@@ -256,7 +216,7 @@
                   </div>
                   <div class="form-group">
                       <div class="col-md-8 col-md-offset-4">
-                        
+                        <a href="{{route('viewPendingApprovalUser')}}"<button class="btn btn-sm btn-danger" type="submit">Back</button></a>
                         <button class="btn btn-sm btn-primary" type="submit">Submit</button>
                       </div>
                   </div>
@@ -275,14 +235,5 @@
         </div>
         <!-- end row -->
       </div>
-      <script>
-      $(document).ready(function() {
-        // initialise Datetimepicker and Sliders
-        demo.initDateTimePicker();
-        if ($('.slider').length != 0) {
-          demo.initSliders();
-        }
-      });
-    </script>
-        
+      
 @endsection

@@ -25,6 +25,16 @@ class UserController extends Controller
          return view('user.index', compact('users'));
     }
 
+    public function viewPendingApprovalUser()
+    {
+         $pendinguser = DB:: table('users')
+                  -> select ('id','name','email', 'role')
+                  ->where('approval_status', 'Pending Approval')
+                  -> orderBy('created_at','DESC')
+                  -> get();
+         return view('user.pending-approval', compact('pendinguser'));
+    }
+
     public function viewAddUser()
     {
         
@@ -149,6 +159,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function viewEditPA($id)
+    {
+        
+        $data = User::getSingleData($id);
+
+         return view('user.editPA', [
+            'data' => $data
+
+        ]);
+    }
+
     public function viewApprove($id)
     {
         $data = User::getSingleData($id);
@@ -164,6 +185,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->approval_status = Input::get('approval_status');
         $user->commission = Input::get('commission')/100;
+        $user->credit = 200.00;
         $user->save();
         return redirect()->route('viewUser');
     }
@@ -195,6 +217,7 @@ class UserController extends Controller
             $user->service = Input::get('service');
             $user->company_name = Input::get('company_name');
             $user->name = Input::get('name');
+            $user->commission = Input::get('commission')/100;
             $user->email = Input::get('email');
             $user->icnumber = Input::get('icnumber');
             $user->u_address = Input::get('u_address');
@@ -261,7 +284,7 @@ class UserController extends Controller
         if ($validator->fails())
            {
            // The given data did not pass validation
-             return redirect()->route('viewAddUser')->with('flash_message_error', 'Email already exists');
+             return redirect()->route('viewUser')->with('flash_message_error', 'Email already exists');
             // we can also  return same page and then displaying in Bootstap Warning Well
             }
         else {
@@ -276,14 +299,14 @@ class UserController extends Controller
         
          $email = $request->email;;
          Mail::to($email)->send(new SuccessfullyRegister($email));
-         return redirect()->route('viewUser');
+         return redirect()->route('viewUser')->with('flash_message_success', 'Successfully add new record');
        }
   
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        User::destroy($id);
+        User::destroy($request->id);
         return redirect()->route('viewUser');
     }
 }

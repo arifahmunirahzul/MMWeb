@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
-        if (Auth::user()->role == 'ServiceProvider')
+        if (Auth::user()->role == 'Service Provider')
             {
                 return redirect('/home');
                 
@@ -37,19 +37,22 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/user', ['as' => 'viewUser','uses' => 'UserController@viewUser']);
 Route::get('/user/viewadd', ['as' => 'viewAddUser','uses' => 'UserController@viewAddUser']);
 Route::get('/profile', ['as' => 'viewProfile','uses' => 'UserController@viewProfile']);
+Route::get('/pending-approval', ['as' => 'viewPendingApprovalUser','uses' => 'UserController@viewPendingApprovalUser']);
+Route::get('/pending-approval/edit/{id}', ['as' => 'viewEditPA','uses' => 'UserController@viewEditPA']);
 Route::get('/user/edit/{id}', ['as' => 'viewEdit','uses' => 'UserController@viewEdit']);
 Route::get('/view-edit-profile', ['as' => 'viewEditProfile','uses' => 'UserController@viewEditProfile']);
 Route::post('/editprofile-save/{id}', ['uses' => 'UserController@editUserProfile','as' => 'editUserProfile']);
 Route::get('user/view-profile/{id}', ['as' => 'viewUserProfile','uses' => 'UserController@viewUserProfile']);
 Route::post('/user/edit-save/{id}', ['uses' => 'UserController@editUser','as' => 'editUser']);
 Route::post('/user/add', ['as' => 'addUser','uses' => 'UserController@addUser']);
-Route::delete('/user/delete/{id}', ['uses' => 'UserController@delete','as' => 'delete']);
+Route::delete('/user/delete', ['uses' => 'UserController@delete','as' => 'delete']);
 Route::get('/user/view-approve/{id}', ['as' => 'viewApprove','uses' => 'UserController@viewApprove']);
 Route::post('/user/save-approve/{id}', ['uses' => 'UserController@ApproveSP','as' => 'ApproveSP']);
-Route::get('/logout', function(){Auth::logout(); return Redirect::to('login');
+Route::get('/logout', function(){Auth::logout(); return Redirect::to('/login');
     });
 
 Route::get('/job-pending', ['as' => 'viewPendingJob','uses' => 'JobController@viewPendingJob']);
+Route::post('/job-grabjob', ['as' => 'grabjob','uses' => 'JobController@grabjob']);
 Route::get('/job-view/{job_id}', ['as' => 'viewJob','uses' => 'JobController@viewJob']);
 Route::get('/job-view-quotation/{job_id}', ['as' => 'viewQuotation','uses' => 'JobController@viewQuotation']);
 Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' => 'JobController@SubmitQuotation']);

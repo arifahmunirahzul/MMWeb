@@ -123,7 +123,6 @@
                       <br>
                       <div class="form-group">
                         <a href="{{route('viewPendingJob')}}"<button class="btn btn-sm btn-danger" type="submit">Back</button></a>
-                        <a href="{{route('viewQuotation',['job_id'=>$data->job_id])}}"<button class="btn btn-sm btn-primary" type="submit">Submit Quotation</button></a>
                       </div>
                      
                     </div>

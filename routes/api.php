@@ -22,8 +22,20 @@ Route::group([
     
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@authenticate');
-    Route::post('logout', 'AuthController@logout');
     Route::post('forgot/password', 'Auth\ForgotPasswordController');
+
+});
+
+Route::group([
+
+    'middleware' => 'jwt.verify',
+    'prefix' => 'auth'
+
+], function ($router) {
+    
+;
+    Route::post('logout', 'AuthController@logout');
+    
 
 });
 
@@ -54,6 +66,19 @@ Route::group([
     Route::post('pembantu-rumah/{customer_id}', 'APIBookController@BookPembantuRumah');
       
 });
+
+Route::group([
+
+    'middleware' => 'jwt.verify',
+    'prefix' => 'customer'
+
+], function ($router) {
+
+    Route::get('view-list-booking/{customer_id}', 'APIBitJobController@ViewListBooking');
+      
+});
+
+
 
 Route::group([
 

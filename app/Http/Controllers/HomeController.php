@@ -105,6 +105,11 @@ class HomeController extends Controller
                   -> where('provider_id', $user_id)
                   -> get();
 
+        $credit_sp = DB::table('users')
+                   -> select('credit')
+                   -> where('id', $user_id)
+                   ->get();
+
         $latestbook = DB:: table('job_requests')
                   -> select ('booking_id','service','state','city', 'created_at')
                   ->orderBy('created_at', 'desc')
@@ -128,8 +133,10 @@ class HomeController extends Controller
           'pendingorder' => $pendingorder,
           'pendingorder_sp' => $pendingorder_sp,
           'completedorder' => $completedorder,
+          'completedorder_sp' => $completedorder_sp,
           'latestbook' => $latestbook,
-          'latestbook_sp' => $latestbook_sp
+          'latestbook_sp' => $latestbook_sp,
+          'credit_sp' => $credit_sp
 
         ]);
     }

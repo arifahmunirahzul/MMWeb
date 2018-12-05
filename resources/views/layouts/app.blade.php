@@ -15,9 +15,8 @@
   <link href="{{ URL::asset('https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css') }}" rel="stylesheet">
   <!-- CSS Files -->
   <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/css/paper-dashboard.css') }}" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -95,6 +94,12 @@
             <a href="{{url('/user')}}">
               <i class="nc-icon nc-circle-10"></i>
               <p>User Management</p>
+            </a>
+          </li>
+           <li class="{!! classActivePath('pending-approval') !!}">
+            <a href="{{url('/pending-approval')}}">
+              <i class="nc-icon nc-time-alarm"></i>
+              <p>PENDING APPROVAL</p>
             </a>
           </li>
           <li class="{!! classActivePath('list-job-request') !!}">
@@ -503,7 +508,7 @@
   <!--  Notifications Plugin    -->
   <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript') }}"></script>
+  <script src="{{ asset('assets/js/paper-dashboard.min.js?v=2.0.1') }}" type="text/javascript"></script>
   <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
   <script src="{{ asset('assets/demo/demo.js') }}"></script>
   <script>
@@ -525,6 +530,29 @@
       modal.find('.modal-body #price').val(price);
       modal.find('.modal-body #message').val(message);
       modal.find('.modal-body #status').val(status);
+    })
+
+    $('#myModalGrabJB').on('show.bs.modal', function (event) {
+      
+      var button = $(event.relatedTarget) 
+      var job_id = button.data('job_id')
+      
+      var modal = $(this)
+      
+      modal.find('.modal-body #job_id').val(job_id);
+      
+    })
+
+   
+    $('#delete').on('show.bs.modal', function (event) {
+      
+      var button = $(event.relatedTarget) 
+      var id = button.data('id')
+      
+      var modal = $(this)
+      
+      modal.find('.modal-body #id').val(id);
+      
     })
  </script>
   <script>

@@ -7,6 +7,18 @@
             <div class="card"> 
               <div class="card-header">
                 <h4 class="card-title">User Management</h4>
+                @if(Session::has('flash_message_error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button> 
+                                <strong>{!! session('flash_message_error') !!}</strong>
+                        </div>
+                @endif
+                  @if(Session::has('flash_message_success'))
+                        <div class="alert alert-success alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button> 
+                                <strong>{!! session('flash_message_success') !!}</strong>
+                        </div>
+                @endif
                 <div class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add User</button></div>
               </div>
               <div class="card-body">
@@ -37,12 +49,9 @@
                       <td class="text-center">{{$data->role}}</td>
                       @endif
                       <td class="text-center">
-                        <form name ="frmdelete" action="{{route('delete',['id'=>$data->id])}}" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <a href="{{route('viewEdit',['id'=>$data->id])}}" class="btn btn-warning btn-link btn-icon btn-m edit"><i class="fa fa-edit"></i></a>
-                        <button class="btn btn-danger btn-link btn-icon btn-m remove" type="submit" onclick="return myFunction()"><i class="fa fa-times"></i></button>
-                      </form>
+                        <button class="btn btn-danger btn-link btn-icon btn-m remove" type="submit"  data-id="{{$data->id}}"data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i></button>
+                      
                       </td>
                     </tr>
                     @endforeach
@@ -93,4 +102,29 @@
             return false;
          }
         </script>
+
+   <!--Modal -->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class ="modal-content">
+            <div class="modal-header">
+              <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+              <h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+            </div>
+            <form action="{{route('delete')}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-body">
+             <p class = "text-center">
+              Are you sure want to delete this record?
+             </p>
+             <input type="hidden" name="id" id="id" value="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn default" data-dismiss="modal">No, Cancel</button>
+              <button type="submit" class="btn btn-primary">Yes, Delete</button>
+            </div>
+          </form>
+      </div>
+    </div>
 @endsection
