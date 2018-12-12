@@ -72,7 +72,7 @@ class APIBookController extends Controller
            $book->message = Input::get('message');
            $book->save();
 
-         $job_request = new JobRequest;
+           $job_request = new JobRequest;
            $job_request->booking_id = $booking_no;
            $job_request->address = Input::get('address');
            $job_request->city = Input::get('city');
@@ -101,8 +101,8 @@ class APIBookController extends Controller
       
       if($role == 'Customer'){
 
-         $booking_no = Booking::getNextBookNumber();
-         $book = new Booking;
+           $booking_no = Booking::getNextBookNumber();
+           $book = new Booking;
            $book->booking_id = $booking_no;
            $book->customer_id = $customer_id;
            $book->date_booking = Input::get('date_booking');
@@ -113,7 +113,7 @@ class APIBookController extends Controller
            $book->message = Input::get('message');
            $book->save();
 
-         $job_request = new JobRequest;
+           $job_request = new JobRequest;
            $job_request->booking_id = $booking_no;
            $job_request->address = Input::get('address');
            $job_request->city = Input::get('city');

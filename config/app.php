@@ -163,6 +163,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\DynamicTypeService::class,
+        App\Providers\DynamicTypeProperty::class,
+        App\Providers\DynamicTypeEvent::class,
 
 
     ],

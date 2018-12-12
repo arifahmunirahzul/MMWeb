@@ -293,6 +293,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
+            'u_phone'=>$request['u_phone'],
             'role' => $request['role'],
             'status' => $request['status']? 1 : 0,
             ]);
@@ -308,5 +309,17 @@ class UserController extends Controller
     {
         User::destroy($request->id);
         return redirect()->route('viewUser');
+    }
+
+    public function addCredit(Request $request)
+    {
+        $user_id = $request->id;
+        $current_credit = DB::table('users')->where('id', '=', $user_id)->value('credit'); 
+        $new_credit = $request->credit;
+
+        $addcredit = User::find($user_id);
+        $addcredit->credit = $current_credit + $new_credit;
+        $addcredit->save();
+        return redirect()->route('viewUser')->with('flash_message_success', 'Credit amount has been added');
     }
 }

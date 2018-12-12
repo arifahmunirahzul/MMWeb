@@ -50,6 +50,9 @@
                 @endif
                 @if($data->approval_status == 'Approved')
                  <div class="button-container"><i class="fa fa-credit-card"></i> CREDIT : RM {{$data->credit}}</div>
+                 <div>
+                   <center><a href=""<button class="btn  btn-success btn-sm btn-round" data-mycompany_name="{{$data->company_name}}" data-myservice="{{$data->service}}" data-myid="{{$data->id}}" data-toggle="modal" data-target="#myModalAddCredit"><i class="fa fa-plus-square"></i> ADD CREDIT</button></a></center>
+                 </div>
                 @endif
                 <hr>
                 <div class="button-container">
@@ -235,5 +238,33 @@
         </div>
         <!-- end row -->
       </div>
+
+
+      <!--Modal -->
+  <div class="modal fade" id="myModalAddCredit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class ="modal-content">
+          <div class="modal-header">
+            <button type ="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span></button>
+            <h4 class="modal-title" id="myModalLabel">ADD CREDIT AMOUNT</h4>
+          </div>
+          <form action="{{route('addCredit')}}" method="POST">
+          <input type="hidden" name="_method" value="POST">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <div class="modal-body">
+            <p class = "text-center">
+              You can add credit amount for service provider here.
+             </p>
+             <input type="hidden" name="id" id="id" value="">
+            @include('user.add-credit')
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
       
 @endsection

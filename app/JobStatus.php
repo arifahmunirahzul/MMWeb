@@ -7,7 +7,7 @@ use App\JobRequest;
 
 class JobStatus extends Model
 {
-	protected $primaryKey = 'jobstatus_id';
+	  public $primaryKey = 'jobstatus_id';
     protected $fillable = [
         'jobstatus_id', 'job_id', 'job_status', 'created_at', 'updated_at'
         ]; 
@@ -15,7 +15,7 @@ class JobStatus extends Model
     public $timestamps = false;
 
      public static function CreateStatusJob(){
-    	   $lastjob = JobRequest::orderBy('created_at', 'desc')->first();
+    	     $lastjob = JobRequest::orderBy('created_at', 'desc')->first();
            $jobstatus = new Jobstatus;
            $jobstatus->job_status = "Pending";
            $jobstatus->job_id =$lastjob->job_id;

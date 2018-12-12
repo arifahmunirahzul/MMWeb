@@ -24,7 +24,7 @@ class JobController extends Controller
         $jobrequest = DB:: table('job_requests')
                   -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
                   -> join ('users', 'users.id', '=', 'bookings.customer_id')
-                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'job_requests.created_at')
+                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'job_requests.created_at', 'bookings.date_booking')
                    ->where('job_requests.status_job', '=', 'Pending')
                    ->where('job_requests.service', '=', $service )
                   -> orderBy('job_requests.job_id','DESC')

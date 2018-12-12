@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Booking;
+use DB;
 
 class Booking extends Model
 {
+    public $primaryKey = 'booking_id';
     protected $fillable = [
-        'booking_id', 'customer_id', 'type_service', 'date_booking', 'duration', 'type_property', 'clean_area', 'package', 'total_visitor', 'type_event', 'message', 'created_at', 'updated_at'
+        'booking_id', 'customer_id', 'adminbook_id', 'customer_name', 'customer_hp', 'type_service', 'date_booking', 'duration', 'type_property', 'clean_area', 'package', 'total_visitor', 'type_event', 'message', 'created_at', 'updated_at'
         ]; 
 
     public $timestamps = false;
@@ -16,17 +18,16 @@ class Booking extends Model
      public static function getNextBookNumber()
     {
         // Get the last created order
-        $lastnumber = Booking::orderBy('created_at', 'desc')->first();
-
+        //$lastnumber = Booking::orderBy('created_at', 'desc')->first();
+        
+        $lastnumber = DB::table('bookings')->select('booking_id')->orderBy('created_at', 'desc')->value('booking_id');
+        
         if ( ! $lastnumber)
-            // We get here if there is no order at all
-            // If there is no number set it to 0, which will be 1 at the end.
-
             $number = 0;
         else 
-            $number = substr($lastnumber->booking_id, 3);
+            $number = substr($lastnumber, 3);
 
-        // If we have ORD000001 in the database then we only want the number
+        // If we have MM000001 in the database then we only want the number
         // So the substr returns this 000001
 
         // Add the string in front and higher up the number.
