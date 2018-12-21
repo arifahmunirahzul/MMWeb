@@ -24,26 +24,26 @@
                         </div>
                 @endif
                 </div>
+
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th class="text-center">Bil</th>
                       <th class="text-center">Booking Number</th>
                       <th class="text-center">Customer Name</th>
-                      <th class="text-center">Service</th>
-                      <th class="text-center">Date/Time</th>
+                      <th class="text-center">Date Booking</th>
                       <th class="disabled-sorting text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                     <?php $i = 1;?>
-                      @foreach($jobrequest as $key=>$data)
+                     
+                      <?php $i = 1;?>
+                      @foreach($jobrequest as $key=>$data) 
                     <tr>
                       <td class="text-center">{{$i++}}</td>
                       <td class="text-center">{{$data->booking_id}}</td>
                       <td class="text-center">{{$data->name}}</td>
-                      <td class="text-center">{{$data->service}}</td>
-                      <td class="text-center">{{date('d M Y', strtotime($data->date_booking))}}</td>
+                      <td class="text-center">{{date('d M Y', strtotime($data->date_booking))}}<br> Price (MYR): RM {{$data->duration*25}}</td>
                       <td class="text-center">
                         <a href="{{route('viewJob',['job_id'=>$data->job_id])}}" class="btn btn-sm edit">View</a>
                         @if($data->service != 'Pembantu Rumah')

@@ -108,13 +108,13 @@ class APIBitJobController extends Controller
                $bitjob->save();
 
                $jobrequest = JobRequest::find($job_id);
-               $jobrequest->status_job = 'Completed';
+               $jobrequest->status_job = 'Active';
                $jobrequest->provider_id = $provider_id;
                $jobrequest->save();
 
                $jobstatus = new JobStatus;
                $jobstatus->job_id = $job_id;
-               $jobstatus->job_status = 'Completed';
+               $jobstatus->job_status = 'Active';
                $jobstatus->save();
 
                $credit_save = User::find($provider_id);

@@ -78,7 +78,7 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Pending Bookings</p>
+                      <p class="card-category">Pending</p>
                       @foreach($pendingorder as $key=>$data)
                       <p class="card-title">{{$data->pendingorders}}
                         <p>
@@ -106,7 +106,7 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Complete Booking</p>
+                      <p class="card-category">Complete</p>
                       @foreach($completedorder as $key=>$data)
                       <p class="card-title">{{$data->completedorders}}
                         <p>

@@ -80,8 +80,14 @@ Route::get('/job-view-quotation/{job_id}', ['as' => 'viewQuotation','uses' => 'J
 Route::post('/job-submit-quotation/{job_id}', ['as' => 'SubmitQuotation','uses' => 'JobController@SubmitQuotation']);
 Route::get('/status-quotation', ['as' => 'viewStatusQuotation','uses' => 'JobController@viewStatusQuotation']);
 Route::get('/list-job-request', ['as' => 'ListPendingJob','uses' => 'JobController@ListPendingJob']);
+Route::get('/list-job-filter', ['as' => 'FilterListPendingJob','uses' => 'JobController@FilterListPendingJob']);
 Route::get('/provider-quotation', ['as' => 'ProviderQuotation','uses' => 'JobController@ProviderQuotation']);
-Route::get('/view-quotation/{bitjob_id}', ['as' => 'viewQuotationDetails','uses' => 'JobController@viewQuotationDetails']);
+Route::get('/view-quotation', ['as' => 'viewQuotationDetails','uses' => 'JobController@viewQuotationDetails']);
+Route::get('/detail-quotation/{booking_id}', ['as' => 'detailQuotation','uses' => 'JobController@detailQuotation']);
+
+Route::get('/view-task-pembantu-rumah', ['as' => 'viewTaskPembantuRumah','uses' => 'ScheduleController@viewTaskPembantuRumah']);
+Route::get('/view-task-urut-pantang', ['as' => 'viewTaskUrutPantang','uses' => 'ScheduleController@viewTaskUrutPantang']);
+Route::get('/view-task-katering', ['as' => 'viewTaskKatering','uses' => 'ScheduleController@viewTaskKatering']);
 
 Route::get('/type-service', ['as' => 'TypeService','uses' => 'TableController@TypeService']);
 Route::get('/type-service/view-add', ['as' => 'viewAddTypeService','uses' => 'TableController@viewAddTypeService']);

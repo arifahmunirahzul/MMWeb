@@ -39,9 +39,12 @@ class BookController extends Controller
      public function addUserNew(Request $request)
     {
         
-         $email = Input::get('email');
+        $name = $request->name;
 
-         $validator = Validator::make(
+        $email = 'testmm_'.$name.'@gmail.com';
+        $password = '123456';
+         
+        $validator = Validator::make(
         array(
 
             'email' => $email
@@ -60,17 +63,18 @@ class BookController extends Controller
      
          $data = User::create([
             'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'email' => $email,
+            'password' => bcrypt($password),
             'u_phone'=>$request['u_phone'],
-            'role' => $request['role'],
-            'status' => $request['status']? 1 : 0,
+            'role' => 'Customer',
+            'status' => 1,
             ]);
         
-         $email = $request->email;;
+         
          Mail::to($email)->send(new SuccessfullyRegister($email));
          return redirect()->route('viewFormAddPR')->with('flash_message_success', 'Successfully add new record');
-        }
+      }
+        
     }
 
     public function BookPembantuRumah(Request $request)
@@ -198,9 +202,12 @@ class BookController extends Controller
      public function addUserNewUP(Request $request)
     {
         
-         $email = Input::get('email');
+         $name = $request->name;
 
-         $validator = Validator::make(
+        $email = 'testmm_'.$name.'@gmail.com';
+        $password = '123456';
+         
+        $validator = Validator::make(
         array(
 
             'email' => $email
@@ -219,17 +226,17 @@ class BookController extends Controller
      
          $data = User::create([
             'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'email' => $email,
+            'password' => bcrypt($password),
             'u_phone'=>$request['u_phone'],
-            'role' => $request['role'],
-            'status' => $request['status']? 1 : 0,
+            'role' => 'Customer',
+            'status' => 1,
             ]);
         
-         $email = $request->email;;
+         
          Mail::to($email)->send(new SuccessfullyRegister($email));
          return redirect()->route('viewFormAddUP')->with('flash_message_success', 'Successfully add new record');
-        }
+      }
     }
 
     public function EditUrutPantang (Request $request)
@@ -324,9 +331,12 @@ class BookController extends Controller
      public function addUserNewKatering(Request $request)
     {
         
-         $email = Input::get('email');
+        $name = $request->name;
 
-         $validator = Validator::make(
+        $email = 'testmm_'.$name.'@gmail.com';
+        $password = '123456';
+         
+        $validator = Validator::make(
         array(
 
             'email' => $email
@@ -345,17 +355,17 @@ class BookController extends Controller
      
          $data = User::create([
             'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'email' => $email,
+            'password' => bcrypt($password),
             'u_phone'=>$request['u_phone'],
-            'role' => $request['role'],
-            'status' => $request['status']? 1 : 0,
+            'role' => 'Customer',
+            'status' => 1,
             ]);
         
-         $email = $request->email;;
+         
          Mail::to($email)->send(new SuccessfullyRegister($email));
          return redirect()->route('viewFormAddKatering')->with('flash_message_success', 'Successfully add new record');
-        }
+      }
     }
 
     public function EditKatering (Request $request)

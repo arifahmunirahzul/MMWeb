@@ -24,7 +24,7 @@ class JobController extends Controller
         $jobrequest = DB:: table('job_requests')
                   -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
                   -> join ('users', 'users.id', '=', 'bookings.customer_id')
-                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'job_requests.created_at', 'bookings.date_booking')
+                  -> select ('job_requests.job_id','job_requests.booking_id', 'bookings.duration','job_requests.service', 'users.name','bookings.date_booking')
                    ->where('job_requests.status_job', '=', 'Pending')
                    ->where('job_requests.service', '=', $service )
                   -> orderBy('job_requests.job_id','DESC')
@@ -66,18 +66,32 @@ class JobController extends Controller
         return redirect()->route('viewPendingJob')->with('flash_message_success', 'Quotation has been successfully submit');
     }
 
-    public function viewStatusQuotation()
+    public function viewStatusQuotation() 
     {
     	  $id = Auth::user()->id;
         $jobstatus = DB:: table('bit_jobs')
                   -> join ('job_requests', 'job_requests.job_id', '=', 'bit_jobs.job_id')
                    -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
                   -> join ('users', 'users.id', '=', 'bookings.customer_id')
-                  -> select ('bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status', 'bit_jobs.price', 'bit_jobs.message')
+                  -> select ('bit_jobs.bitjob_id','bit_jobs.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bit_jobs.status', 'bit_jobs.price', 'bit_jobs.message')
                    ->where('bit_jobs.provider_id', '=', $id)
                   -> orderBy('bit_jobs.updated_at','DESC')
                   -> get();
          return view('job.status-quotation', compact('jobstatus'));
+    }
+
+    public function detailQuotation($booking_id)
+    {
+
+       $job = DB:: table('bookings')
+                  -> join ('job_requests', 'job_requests.booking_id', '=', 'bookings.booking_id')
+                  -> join ('users', 'users.id', '=', 'bookings.customer_id')
+                  -> join ('bit_jobs', 'bit_jobs.job_id', '=', 'job_requests.job_id')
+                  -> select ('bookings.booking_id', 'bookings.type_service', 'users.name', 'users.email', 'users.u_phone', 'bookings.date_booking', 'bookings.duration', 'bookings.type_property', 'bookings.clean_area', 'bookings.package', 'bookings.total_visitor', 'bookings.type_event', 'bookings.message', 'job_requests.address', 'job_requests.postcode', 'job_requests.city', 'job_requests.state','bit_jobs.status', 'bit_jobs.price')
+                   ->where('bookings.booking_id', '=', $booking_id)
+                  -> get();
+      
+       return view ('job.detail-quotation', compact('job'));
     }
 
     public function ListPendingJob()
@@ -85,10 +99,23 @@ class JobController extends Controller
         $jobrequest = DB:: table('job_requests')
                   -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
                   -> join ('users', 'users.id', '=', 'bookings.customer_id')
-                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'job_requests.created_at', 'job_requests.status_job')
+                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bookings.date_booking', 'job_requests.status_job')
                   -> orderBy('job_requests.job_id','DESC')
                   -> get();
          return view('job.list-pending', compact('jobrequest'));
+    }
+
+    public function FilterListPendingJob()
+    {
+        $status_job =  Input::get("status_job");
+        $jobrequest = DB:: table('job_requests')
+                  -> join ('bookings', 'bookings.booking_id', '=', 'job_requests.booking_id')
+                  -> join ('users', 'users.id', '=', 'bookings.customer_id')
+                  -> select ('job_requests.job_id','job_requests.booking_id', 'job_requests.service', 'users.name', 'bookings.date_booking', 'job_requests.status_job')
+                  ->where('job_requests.status_job', '=' , $status_job)
+                  -> orderBy('job_requests.job_id','DESC')
+                  -> get();
+         return view('job.filter-list-pending', compact('jobrequest'));
     }
 
      public function ProviderQuotation()
@@ -127,7 +154,7 @@ class JobController extends Controller
         if($status_job == 'Pending' && $balance_credit >= 0)
         {
           $jobrequest = JobRequest::find($job_id);
-          $jobrequest->status_job = 'Completed';
+          $jobrequest->status_job = 'Active';
           $jobrequest->provider_id = $provider_id;
           $jobrequest->save();
 
@@ -145,7 +172,7 @@ class JobController extends Controller
 
           $jobstatus = new JobStatus;
           $jobstatus->job_id = $job_id;
-          $jobstatus->job_status = 'Completed';
+          $jobstatus->job_status = 'Active';
           $jobstatus->save();
 
           return redirect()->route('viewPendingJob')->with('flash_message_success', 'You have grab this job'); 
@@ -157,3 +184,4 @@ class JobController extends Controller
 
    
 }
+ 

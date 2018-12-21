@@ -24,7 +24,7 @@ class APIUserController extends Controller
         if($role == 'Service Provider')
         {
             $user = DB:: table('users')
-                  -> select ('id', 'playerId', 'name','email', 'icnumber', 'u_address','url_image', 'u_bankname', 'u_accnumber', 'u_phone', 'role', 'service', 'commission', 'approval_status', 'about_me')
+                  -> select ('id', 'playerId', 'name','email', 'icnumber', 'u_address','u_postcode', 'u_city', 'u_state','url_image', 'u_bankname', 'u_accnumber', 'u_phone', 'role', 'service', 'commission', 'approval_status', 'about_me')
                   ->where('id', $id)
                   -> get();
 
@@ -38,6 +38,9 @@ class APIUserController extends Controller
                                       'email' => $data->email,
                                       'icnumber' => $data->icnumber,
                                       'u_address' => $data->u_address,
+                                      'u_postcode' => $data->u_postcode,
+                                      'u_city'  => $data->u_city,
+                                      'u_state' => $data->u_state,
                                       'url_image' => $data->url_image,
                                       'u_bankname' => $data->u_bankname,
                                       'u_accnumber' => $data->u_accnumber,
@@ -58,7 +61,7 @@ class APIUserController extends Controller
         else if ($role == 'Customer'){
 
             $user = DB:: table('users')
-                  -> select ('id', 'playerId', 'name','email', 'icnumber', 'u_address','url_image', 'u_bankname', 'u_accnumber', 'u_phone', 'role', 'about_me')
+                  -> select ('id', 'playerId', 'name','email', 'icnumber', 'u_address','u_postcode', 'u_city', 'u_state','url_image', 'u_bankname', 'u_accnumber', 'u_phone', 'role', 'about_me')
                   ->where('id', $id)
                   -> get();
 
@@ -71,7 +74,9 @@ class APIUserController extends Controller
                                       'name' => $data->name,
                                       'email' => $data->email,
                                       'icnumber' => $data->icnumber,
-                                      'u_address' => $data->u_address,
+                                      'u_postcode' => $data->u_postcode,
+                                      'u_city'  => $data->u_city,
+                                      'u_state' => $data->u_state,
                                       'url_image' => $data->url_image,
                                       'u_bankname' => $data->u_bankname,
                                       'u_accnumber' => $data->u_accnumber,

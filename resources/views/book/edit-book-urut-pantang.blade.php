@@ -27,7 +27,7 @@
                     <label class="col-sm-2 col-form-label">Package</label>
                     <div class="col-sm-10">
                       <div class="form-group">
-                              <select name="package" id="package" class="form-control" placeholder="Please Select Property" >
+                              <select name="package" id="package" class="form-control" placeholder="Please Select Package" >
                                  <option value="14">14 Days</option>
                                  <option value="21">21 Days</option>
                                  <option value="28">28 Days</option>

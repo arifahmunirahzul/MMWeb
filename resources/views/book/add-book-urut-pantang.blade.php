@@ -125,11 +125,12 @@
          {{Form::open(array('route' => 'addUserNewUP','method'=>'POST'))}}
           @csrf
           <div class="modal-body">
-            @include('user.add')
+            @include('user.add-user')
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+            
             <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
           </div>
         {{Form::close()}}
       </div>

@@ -43,7 +43,7 @@
                       <td class="text-center">{{$data->name}}</td>
                       <td class="text-center">{{$data->email}}</td>
                       @if($data->role == 'Service Provider')
-                      <td class="text-center">{{$data->role}} <br>({{$data->approval_status}}) </td>
+                      <td class="text-center">{{$data->role}} <br>({{$data->service}}) </td>
                       @endif
                        @if($data->role == 'Admin' or $data->role == 'Customer')
                       <td class="text-center">{{$data->role}}</td>

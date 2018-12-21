@@ -109,7 +109,7 @@
             <a data-toggle="collapse" href="#formsBooking">
               <i class="fa fa-pencil-square-o"></i>
               <p>
-                Booking Service
+                BOOK A SERVICE
                 <b class="caret"></b>
               </p>
             </a>
@@ -129,6 +129,37 @@
                 </li>
                 <li class="{!! classActivePath('view-book-katering') !!}">
                   <a href="{{url('/view-book-katering')}}">
+                    <span class="sidebar-mini-icon">KTG</span>
+                    <span class="sidebar-normal"> KATERING</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+            <li>
+            <a data-toggle="collapse" href="#formsSchedule">
+              <i class="fa fa-calendar"></i>
+              <p>
+                Schedule Task
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="formsSchedule">
+              <ul class="nav">
+                <li class="{!! classActivePath('view-task-pembantu-rumah') !!}">
+                  <a href="{{url('/view-task-pembantu-rumah')}}">
+                    <span class="sidebar-mini-icon">PR</span>
+                    <span class="sidebar-normal"> PEMBANTU RUMAH (HARIAN) </span>
+                  </a>
+                </li>
+                <li class="{!! classActivePath('view-task-urut-pantang') !!}">
+                  <a href="{{url('/view-task-urut-pantang')}}">
+                    <span class="sidebar-mini-icon">UP</span>
+                    <span class="sidebar-normal"> URUT PANTANG </span>
+                  </a>
+                </li>
+                <li class="{!! classActivePath('view-task-katering') !!}">
+                  <a href="{{url('/view-task-katering')}}">
                     <span class="sidebar-mini-icon">KTG</span>
                     <span class="sidebar-normal"> KATERING</span>
                   </a>
@@ -334,11 +365,8 @@
   <script src="{{ asset('assets/demo/demo.js') }}"></script>
 
   <script src="{{ asset('assets/js/plugins/select2/select2.full.min.js') }}"></script>
-  <script>
-                                        jQuery(function () {
-                                            App.initHelpers(['select2']);
-                                        });
-  </script>
+
+
   <script>
     $('#edit').on('show.bs.modal', function (event) {
       
@@ -569,7 +597,7 @@
       });
     });
   </script>
-
+   
 
 </body>
 

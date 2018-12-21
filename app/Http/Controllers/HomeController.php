@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Charts\HomeChart;
 use App\Booking;
+Use App\BitJob;
 use DB;
 use Auth;
 
@@ -49,11 +50,16 @@ class HomeController extends Controller
 
         $bookings = [];
 
+        $acceptbook = [];
+
         foreach ($days as $day) {
           $bookings[] = Booking::whereDate('created_at', $day)->count();
+
+          $acceptbook[] = BitJob::whereDate('created_at', $day)->where('status', '=', 'Accept')->count();
         }
 
         $chart->dataset('Booking','line', $bookings);
+        $chart->dataset('Accept Book','line', $acceptbook);
         $chart->labels($days);
 
         $carbon = Carbon::today();

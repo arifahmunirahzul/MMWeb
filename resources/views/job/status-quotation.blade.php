@@ -21,6 +21,7 @@
                       <th class="text-center">Price (RM)</th>
                       <th class="text-center" style="width: 25%;">Message</th>
                       <th class="text-center">Current Status</th>
+                      <th class="text-center">Action</th>
                       
                     </tr>
                   </thead>
@@ -33,8 +34,16 @@
                       <td class="text-center">{{$data->name}}</td>
                       <td class="text-center">{{$data->service}}</td>
                        <td class="text-center">RM {{$data->price}}</td>
-                        <td class="text-center">{{$data->message}}</td>
+                      @if($data->message != '')
+                      <td class="text-center">{{$data->message}}</td>
+                      @endif
+                      @if($data->message == '')
+                      <td class="text-center">No message left</td>
+                      @endif
                       <td class="text-center">{{$data->status}}</td>
+                       <td class="text-center">
+                        <a href="{{route('detailQuotation',['booking_id'=>$data->booking_id])}}" class="btn btn-sm btn-success">View</a>
+                      </td>
                     
                     </tr>
                     @endforeach
