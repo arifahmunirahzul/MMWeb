@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Booking;
 use Calendar;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -22,6 +24,7 @@ class ScheduleController extends Controller
 
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $colour = Booking::getColor($value->date_booking);
                 $events[] = Calendar::event(
                     $value->name,
                     true,
@@ -30,8 +33,9 @@ class ScheduleController extends Controller
                     null,
                     // Add color and link on event
                     [
-                        'color' => '#ffbf80',
-                        'url' => 'pass here url and any route',
+                       
+                        'color' => $colour,
+                        'url' => '/mobilemuslim.com/public/view-schedule-details/'.$value->booking_id,
                     ]
                 );
             }
@@ -45,6 +49,7 @@ class ScheduleController extends Controller
         
         
     }
+
 
     public function viewTaskUrutPantang()
     {
@@ -60,6 +65,7 @@ class ScheduleController extends Controller
 
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $colour = Booking::getColor($value->date_booking);
                 $events[] = Calendar::event(
                     $value->name,
                     true,
@@ -68,8 +74,8 @@ class ScheduleController extends Controller
                     null,
                     // Add color and link on event
                     [
-                        'color' => '#d9b3ff',
-                        'url' => 'pass here url and any route',
+                        'color' => $colour,
+                        'url' => '/mobilemuslim.com/public/view-schedule-details/'.$value->booking_id,
                     ]
                 );
             }
@@ -96,6 +102,7 @@ class ScheduleController extends Controller
 
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $colour = Booking::getColor($value->date_booking);
                 $events[] = Calendar::event(
                     $value->name,
                     true,
@@ -104,8 +111,8 @@ class ScheduleController extends Controller
                     null,
                     // Add color and link on event
                     [
-                        'color' => '#8cd9b3',
-                        'url' => 'pass here url and any route',
+                        'color' => $colour,
+                        'url' => '/mobilemuslim.com/public/view-schedule-details/'.$value->booking_id,
                     ]
                 );
             }

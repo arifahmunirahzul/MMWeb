@@ -84,6 +84,8 @@ Route::get('/list-job-filter', ['as' => 'FilterListPendingJob','uses' => 'JobCon
 Route::get('/provider-quotation', ['as' => 'ProviderQuotation','uses' => 'JobController@ProviderQuotation']);
 Route::get('/view-quotation', ['as' => 'viewQuotationDetails','uses' => 'JobController@viewQuotationDetails']);
 Route::get('/detail-quotation/{booking_id}', ['as' => 'detailQuotation','uses' => 'JobController@detailQuotation']);
+Route::get('/view-job-details/{booking_id}', ['as' => 'detailJobView','uses' => 'JobController@detailJobView']);
+Route::get('/view-schedule-details/{booking_id}', ['as' => 'detailSchedule','uses' => 'JobController@detailSchedule']);
 
 Route::get('/view-task-pembantu-rumah', ['as' => 'viewTaskPembantuRumah','uses' => 'ScheduleController@viewTaskPembantuRumah']);
 Route::get('/view-task-urut-pantang', ['as' => 'viewTaskUrutPantang','uses' => 'ScheduleController@viewTaskUrutPantang']);

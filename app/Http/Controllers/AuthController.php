@@ -128,7 +128,7 @@ class AuthController extends Controller
 	      if($role == 'Customer')
 	      {
 	      		$data = DB:: table('users')
-	                -> select ('id','name', 'role','email', 'icnumber', 'u_address', 'u_phone', 'url_image')
+	                -> select ('id','name', 'role','email', 'icnumber', 'u_address', 'u_postcode', 'u_city', 'u_state', 'u_phone', 'url_image')
 	                -> where('id',$userid)
 	                -> get();
 	               
@@ -145,7 +145,7 @@ class AuthController extends Controller
 	      else if($role == 'Service Provider')
 	      {
 	      	     $data = DB:: table('users')
-	                -> select ('id','name', 'role','company_name','service','approval_status','email', 'icnumber', 'u_address', 'u_phone', 'url_image')
+	                -> select ('id','name', 'role','company_name','service','approval_status','email', 'icnumber', 'u_address', 'u_postcode', 'u_city', 'u_state' ,'u_phone', 'url_image')
 	                -> where('id',$userid)
 	                -> get();
 	               

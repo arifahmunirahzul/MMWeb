@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Schedule Task - Task Pantang</h4>
+                <h4 class="card-title">Schedule Task - Urut Pantang</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Booking;
 use DB;
+use Carbon\Carbon;
 
 class Booking extends Model
 {
@@ -35,5 +36,30 @@ class Booking extends Model
         // so it adds the missing zero's when needed.
  
         return 'MM' . sprintf('%06d', intval($number) + 1);
+    }
+
+    public static function getColor($date_booking)
+    {
+        $carbon = Carbon::today();
+        if($date_booking == $carbon)
+        {
+            $colour = '#d9b3ff';
+
+            return $colour;
+        }
+
+        else if($date_booking > $carbon)
+        {
+            $colour = '#8cd9b3';
+            return $colour;
+        }
+
+        else if($date_booking > $carbon)
+        {
+            $colour = '#ffbf80';
+            return $colour;
+        }
+
+       
     }
 }

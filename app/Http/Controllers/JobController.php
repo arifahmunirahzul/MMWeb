@@ -94,6 +94,33 @@ class JobController extends Controller
        return view ('job.detail-quotation', compact('job'));
     }
 
+     public function detailJobView($booking_id)
+    {
+
+       $job = DB:: table('bookings')
+                  -> join ('job_requests', 'job_requests.booking_id', '=', 'bookings.booking_id')
+                  -> join ('users', 'users.id', '=', 'bookings.customer_id')
+                  -> select ('bookings.booking_id', 'bookings.type_service', 'users.name', 'users.email', 'users.u_phone', 'bookings.date_booking', 'bookings.duration', 'bookings.type_property', 'bookings.clean_area', 'bookings.package', 'bookings.total_visitor', 'bookings.type_event', 'bookings.message', 'job_requests.address', 'job_requests.postcode', 'job_requests.city', 'job_requests.state','job_requests.status_job')
+                   ->where('bookings.booking_id', '=', $booking_id)
+                  -> get();
+      
+       return view ('job.view-job-details', compact('job'));
+    }
+
+
+     public function detailSchedule($booking_id)
+    {
+
+       $job = DB:: table('bookings')
+                  -> join ('job_requests', 'job_requests.booking_id', '=', 'bookings.booking_id')
+                  -> join ('users', 'users.id', '=', 'bookings.customer_id')
+                  -> select ('bookings.booking_id', 'bookings.type_service', 'users.name', 'users.email', 'users.u_phone', 'bookings.date_booking', 'bookings.duration', 'bookings.type_property', 'bookings.clean_area', 'bookings.package', 'bookings.total_visitor', 'bookings.type_event', 'bookings.message', 'job_requests.address', 'job_requests.postcode', 'job_requests.city', 'job_requests.state','job_requests.status_job')
+                   ->where('bookings.booking_id', '=', $booking_id)
+                  -> get();
+      
+       return view ('schedule.view-schedule', compact('job'));
+    }
+
     public function ListPendingJob()
     {
         $jobrequest = DB:: table('job_requests')

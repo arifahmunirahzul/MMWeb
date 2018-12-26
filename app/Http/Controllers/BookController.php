@@ -82,7 +82,7 @@ class BookController extends Controller
 
     	   $admin_id = Auth::user()->id;
 
-    	   $booking_no = Booking::getNextBookNumber();
+    	     $booking_no = Booking::getNextBookNumber();
            $book = new Booking;
            $book->booking_id = $booking_no;
            $book->adminbook_id = $admin_id;
