@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
-    public function viewTaskPembantuRumah()
+    public function viewTaskPembantuRumah() 
     {
 
         $events = [];
@@ -65,7 +65,8 @@ class ScheduleController extends Controller
 
         if($data->count()) {
             foreach ($data as $key => $value) {
-                $colour = Booking::getColor($value->date_booking);
+                $date_booking = $value->date_booking;
+                $colour = Booking::getColor($date_booking);
                 $events[] = Calendar::event(
                     $value->name,
                     true,

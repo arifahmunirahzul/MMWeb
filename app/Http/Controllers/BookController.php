@@ -115,7 +115,7 @@ class BookController extends Controller
 
     	$job_id = DB::table('job_requests')->where('booking_id', '=', $booking_id)->value('job_id');
         
-    	$book = Booking::find($booking_id);
+    	  $book = Booking::find($booking_id);
         $book->date_booking = Input::get('date_booking');
         $book->type_service = 'Pembantu Rumah';
         $book->duration = Input::get('duration');

@@ -88,8 +88,11 @@ Route::group([
 ], function ($router) {
 
     Route::get('pending/{provider_id}', 'APIJobRequestController@PendingJobRequests');
+    Route::get('customer-list/{customer_id}', 'APIJobRequestController@CustomerBookList');
       
 });
+
+
 
 Route::group([
 

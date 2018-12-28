@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\NewBooking',
+        'App\Console\Commands\ReminderJob',
+        'App\Console\Commands\ChangeStatusToCompleted',
+        'App\Console\Commands\ChangeStatusToExpired',
     ];
 
     /**
@@ -26,6 +29,16 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('booking:newbook')
                   ->twiceDaily(1, 13);
+
+         $schedule->command('reminder:job')
+                  ->twiceDaily(1, 13);
+
+         $schedule->command('statuschange:completed')
+                  ->daily('0,0,*,*,*');
+
+         $schedule->command('statuschange:expired')
+                  ->daily('0,0,*,*,*');
+
     }
 
     /**

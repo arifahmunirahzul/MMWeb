@@ -40,26 +40,24 @@ class Booking extends Model
 
     public static function getColor($date_booking)
     {
+
         $carbon = Carbon::today();
-        if($date_booking == $carbon)
+        $colour = '';
+        if($date_booking == $carbon->format('Y-m-d'))
         {
             $colour = '#d9b3ff';
-
-            return $colour;
         }
 
-        else if($date_booking > $carbon)
+        else if($date_booking > $carbon->format('Y-m-d'))
         {
             $colour = '#8cd9b3';
-            return $colour;
         }
 
-        else if($date_booking > $carbon)
+        else if($date_booking < $carbon->format('Y-m-d'))
         {
             $colour = '#ffbf80';
-            return $colour;
         }
-
        
+       return $colour;
     }
 }
